@@ -33,57 +33,69 @@ namespace Streaming_BD
             this.lblEmail = new System.Windows.Forms.Label();
             this.lblDataNascimento = new System.Windows.Forms.Label();
             this.lblSexo = new System.Windows.Forms.Label();
+            this.lblTipoSub = new System.Windows.Forms.Label();
+            this.lblDuracaoMeses = new System.Windows.Forms.Label();
             // TextBoxes
             this.txtNome = new System.Windows.Forms.TextBox();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.txtDataNascimento = new System.Windows.Forms.TextBox();
             this.txtSexo = new System.Windows.Forms.TextBox();
+            this.txtDuracaoMeses = new System.Windows.Forms.TextBox();
+            // Centralização e layout
+            int textboxWidth = 250;
+            int textboxHeight = 28;
+            // ComboBox Tipo de Subscrição
+            this.cmbTipoSub = new System.Windows.Forms.ComboBox();
+            this.cmbTipoSub.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTipoSub.Items.Clear();
+            this.cmbTipoSub.Items.AddRange(new object[] { "Standart", "Premium" });
+            this.cmbTipoSub.Size = new System.Drawing.Size(textboxWidth, textboxHeight);
             // Buttons
             this.btnMenuInicial = new System.Windows.Forms.Button();
             this.btnAdicionar = new System.Windows.Forms.Button();
-            this.btnVerListaClientes = new System.Windows.Forms.Button();
             // Título
             this.lblTitulo = new System.Windows.Forms.Label();
+
+            // Centralização e layout (moved here to declare variables before use)
+            int formWidth = this.ClientSize.Width > 0 ? this.ClientSize.Width : 500;
+            int startY = 80;
+            int spacingY = 60;
+            int labelHeight = 22;
+            // int textboxHeight = 28; // Removed duplicate declaration
+            // int textboxWidth = 250; // Removed duplicate declaration
+            int centerX = (formWidth - textboxWidth) / 2;
+
             this.SuspendLayout();
             // 
             // btnMenuInicial
             // 
-            this.btnMenuInicial.Location = new System.Drawing.Point(20, 20);
+            this.btnMenuInicial.Location = new System.Drawing.Point(30, this.ClientSize.Height - 60);
             this.btnMenuInicial.Name = "btnMenuInicial";
             this.btnMenuInicial.Size = new System.Drawing.Size(120, 35);
             this.btnMenuInicial.TabIndex = 99;
             this.btnMenuInicial.Text = "Menu Inicial";
             this.btnMenuInicial.UseVisualStyleBackColor = true;
+            this.btnMenuInicial.Anchor = (System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left);
             this.btnMenuInicial.Click += new System.EventHandler(this.btnMenuInicial_Click);
+            this.Controls.Add(this.btnMenuInicial);
             // 
             // btnAdicionar
             // 
-            this.btnAdicionar.Location = new System.Drawing.Point(50, 400);
+            this.btnAdicionar.Location = new System.Drawing.Point(centerX + textboxWidth + 40, startY + 5 * spacingY + labelHeight);
             this.btnAdicionar.Name = "btnAdicionar";
-            this.btnAdicionar.Size = new System.Drawing.Size(200, 40);
+            this.btnAdicionar.Size = new System.Drawing.Size(180, 40);
             this.btnAdicionar.TabIndex = 6;
-            this.btnAdicionar.Text = "Adicionar";
+            this.btnAdicionar.Text = "Adicionar Cliente";
             this.btnAdicionar.UseVisualStyleBackColor = true;
             this.btnAdicionar.Click += new System.EventHandler(this.btnAdicionar_Click);
-            // 
-            // btnVerListaClientes
-            // 
-            this.btnVerListaClientes.Location = new System.Drawing.Point(50, 450);
-            this.btnVerListaClientes.Name = "btnVerListaClientes";
-            this.btnVerListaClientes.Size = new System.Drawing.Size(200, 40);
-            this.btnVerListaClientes.TabIndex = 7;
-            this.btnVerListaClientes.Text = "Ver Lista de Clientes";
-            this.btnVerListaClientes.UseVisualStyleBackColor = true;
-            this.btnVerListaClientes.Click += new System.EventHandler(this.btnVerListaClientes_Click);
             // 
             // lblTitulo
             // 
             this.lblTitulo.Text = "Adicionar Cliente";
             this.lblTitulo.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblTitulo.AutoSize = true;
-            this.lblTitulo.Location = new System.Drawing.Point((this.ClientSize.Width - 300) / 2, 20);
-            this.lblTitulo.Size = new System.Drawing.Size(300, 40);
             this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // O título será centralizado dinamicamente após o layout dos campos
             this.Controls.Add(this.lblTitulo);
             // 
             // Form2
@@ -93,20 +105,31 @@ namespace Streaming_BD
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.btnMenuInicial);
             this.Controls.Add(this.btnAdicionar);
-            this.Controls.Add(this.btnVerListaClientes);
             this.Name = "Form2";
             this.Text = "Adicionar Cliente";
             this.ResumeLayout(false);
             this.PerformLayout();
 
             // Centralização e layout
-            int formWidth = this.ClientSize.Width > 0 ? this.ClientSize.Width : 500;
-            int startY = 80;
-            int spacingY = 60;
-            int labelHeight = 22;
-            int textboxHeight = 28;
-            int textboxWidth = 250;
-            int centerX = (formWidth - textboxWidth) / 2;
+            formWidth = this.ClientSize.Width > 0 ? this.ClientSize.Width : 500;
+            startY = 80;
+            spacingY = 60;
+            labelHeight = 22;
+            textboxHeight = 28;
+            textboxWidth = 250;
+            centerX = (formWidth - textboxWidth) / 2;
+
+            // ComboBox Tipo de Subscrição
+            this.cmbTipoSub.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTipoSub.Items.Clear();
+            this.cmbTipoSub.Items.AddRange(new object[] { "Standart", "Premium" });
+            this.cmbTipoSub.Size = new System.Drawing.Size(textboxWidth, textboxHeight);
+
+            // Botão Adicionar Cliente à direita
+            this.btnAdicionar.Location = new System.Drawing.Point(centerX + textboxWidth + 40, startY + 5 * spacingY + labelHeight);
+
+            // Centraliza o título acima do formulário
+            this.lblTitulo.Location = new System.Drawing.Point(centerX, startY - 60);
 
             // Nome
             this.lblNome.Text = "Nome:";
@@ -115,7 +138,6 @@ namespace Streaming_BD
             this.lblNome.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtNome.Location = new System.Drawing.Point(centerX, startY + labelHeight);
             this.txtNome.Size = new System.Drawing.Size(textboxWidth, textboxHeight);
-
             // Email
             this.lblEmail.Text = "Email:";
             this.lblEmail.Location = new System.Drawing.Point(centerX, startY + spacingY);
@@ -123,7 +145,6 @@ namespace Streaming_BD
             this.lblEmail.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtEmail.Location = new System.Drawing.Point(centerX, startY + spacingY + labelHeight);
             this.txtEmail.Size = new System.Drawing.Size(textboxWidth, textboxHeight);
-
             // Data de Nascimento
             this.lblDataNascimento.Text = "Data de Nascimento:";
             this.lblDataNascimento.Location = new System.Drawing.Point(centerX, startY + 2 * spacingY);
@@ -131,7 +152,6 @@ namespace Streaming_BD
             this.lblDataNascimento.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtDataNascimento.Location = new System.Drawing.Point(centerX, startY + 2 * spacingY + labelHeight);
             this.txtDataNascimento.Size = new System.Drawing.Size(textboxWidth, textboxHeight);
-
             // Sexo
             this.lblSexo.Text = "Sexo:";
             this.lblSexo.Location = new System.Drawing.Point(centerX, startY + 3 * spacingY);
@@ -139,8 +159,21 @@ namespace Streaming_BD
             this.lblSexo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtSexo.Location = new System.Drawing.Point(centerX, startY + 3 * spacingY + labelHeight);
             this.txtSexo.Size = new System.Drawing.Size(textboxWidth, textboxHeight);
-
-            // Adiciona controles ao formulário
+            // Tipo de Subscrição
+            this.lblTipoSub.Text = "Tipo de Subscrição:";
+            this.lblTipoSub.Location = new System.Drawing.Point(centerX, startY + 4 * spacingY);
+            this.lblTipoSub.Size = new System.Drawing.Size(textboxWidth, labelHeight);
+            this.lblTipoSub.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cmbTipoSub.Location = new System.Drawing.Point(centerX, startY + 4 * spacingY + labelHeight);
+            this.cmbTipoSub.Size = new System.Drawing.Size(textboxWidth, textboxHeight);
+            // Duração em meses
+            this.lblDuracaoMeses.Text = "Duração em meses:";
+            this.lblDuracaoMeses.Location = new System.Drawing.Point(centerX, startY + 5 * spacingY);
+            this.lblDuracaoMeses.Size = new System.Drawing.Size(textboxWidth, labelHeight);
+            this.lblDuracaoMeses.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtDuracaoMeses.Location = new System.Drawing.Point(centerX, startY + 5 * spacingY + labelHeight);
+            this.txtDuracaoMeses.Size = new System.Drawing.Size(textboxWidth, textboxHeight);
+            // Adiciona controles ao formulário (labels e campos)
             this.Controls.Add(this.lblNome);
             this.Controls.Add(this.txtNome);
             this.Controls.Add(this.lblEmail);
@@ -149,17 +182,24 @@ namespace Streaming_BD
             this.Controls.Add(this.txtDataNascimento);
             this.Controls.Add(this.lblSexo);
             this.Controls.Add(this.txtSexo);
+            this.Controls.Add(this.lblTipoSub);
+            this.Controls.Add(this.cmbTipoSub);
+            this.Controls.Add(this.lblDuracaoMeses);
+            this.Controls.Add(this.txtDuracaoMeses);
 
-            // Botão Menu Inicial
-            this.btnMenuInicial = new System.Windows.Forms.Button();
-            this.btnMenuInicial.Text = "Menu Inicial";
-            this.btnMenuInicial.Size = new System.Drawing.Size(120, 35);
-            this.btnMenuInicial.Location = new System.Drawing.Point((this.ClientSize.Width - 120) / 2, 350);
-            this.btnMenuInicial.Name = "btnMenuInicial";
-            this.btnMenuInicial.TabIndex = 100;
-            this.btnMenuInicial.UseVisualStyleBackColor = true;
-            this.btnMenuInicial.Click += new System.EventHandler(this.btnMenuInicial_Click);
-            this.Controls.Add(this.btnMenuInicial);
+            // Remove qualquer botão duplicado de adicionar cliente
+            if (this.Controls.Contains(this.btnAdicionar))
+                this.Controls.Remove(this.btnAdicionar);
+            // Cria e adiciona apenas um botão de adicionar cliente centralizado
+            this.btnAdicionar = new System.Windows.Forms.Button();
+            this.btnAdicionar.Text = "Adicionar Cliente";
+            this.btnAdicionar.Size = new System.Drawing.Size(180, 40);
+            this.btnAdicionar.Location = new System.Drawing.Point(centerX + textboxWidth + 40, startY + 5 * spacingY + labelHeight);
+            this.btnAdicionar.Name = "btnAdicionar";
+            this.btnAdicionar.TabIndex = 101;
+            this.btnAdicionar.UseVisualStyleBackColor = true;
+            this.btnAdicionar.Click += new System.EventHandler(this.btnAdicionar_Click);
+            this.Controls.Add(this.btnAdicionar);
         }
 
         #endregion
@@ -173,8 +213,11 @@ namespace Streaming_BD
         private System.Windows.Forms.TextBox txtDataNascimento;
         private System.Windows.Forms.Button btnMenuInicial;
         private System.Windows.Forms.Button btnAdicionar;
-        private System.Windows.Forms.Button btnVerListaClientes;
         private System.Windows.Forms.TextBox txtSexo;
         private System.Windows.Forms.Label lblTitulo;
+        private System.Windows.Forms.Label lblTipoSub;
+        private System.Windows.Forms.Label lblDuracaoMeses;
+        private System.Windows.Forms.TextBox txtDuracaoMeses;
+        private System.Windows.Forms.ComboBox cmbTipoSub;
     }
 }
