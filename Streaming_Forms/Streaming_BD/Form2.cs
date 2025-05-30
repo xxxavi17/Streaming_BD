@@ -66,13 +66,12 @@ namespace Streaming_BD
                     {
                         DateTime dataInicio = DateTime.Now;
                         DateTime dataFim = dataInicio.AddMonths(duracaoMeses);
-                        // Corrigido: só pode ser 'ativa' ou 'inativa'
-                        string estado = dataFim >= DateTime.Today ? "ativa" : "inativa";
+                        // O estado será atualizado pela trigger no SQL Server
                         string querySub = "INSERT INTO Streaming_Subscricao (tipo_sub, estado, duracao_meses, id_cliente, data_inicio, data_fim) VALUES (@tipo_sub, @estado, @duracao_meses, @id_cliente, @data_inicio, @data_fim)";
                         using (SqlCommand cmd = new SqlCommand(querySub, conn))
                         {
                             cmd.Parameters.AddWithValue("@tipo_sub", cmbTipoSub.SelectedItem.ToString());
-                            cmd.Parameters.AddWithValue("@estado", estado);
+                            cmd.Parameters.AddWithValue("@estado", "ativa"); // Valor temporário, trigger ajusta
                             cmd.Parameters.AddWithValue("@duracao_meses", duracaoMeses);
                             cmd.Parameters.AddWithValue("@id_cliente", idCliente);
                             cmd.Parameters.AddWithValue("@data_inicio", dataInicio);

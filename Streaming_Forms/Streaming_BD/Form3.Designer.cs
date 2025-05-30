@@ -41,11 +41,11 @@ namespace Streaming_BD
             // dgvClientes
             // 
             this.dgvClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvClientes.Location = new System.Drawing.Point(50, 50);
+            this.dgvClientes.Location = new System.Drawing.Point(30, 70);
             this.dgvClientes.Name = "dgvClientes";
             this.dgvClientes.RowHeadersWidth = 51;
             this.dgvClientes.RowTemplate.Height = 29;
-            this.dgvClientes.Size = new System.Drawing.Size(700, 300);
+            this.dgvClientes.Size = new System.Drawing.Size(1020, 550);
             this.dgvClientes.TabIndex = 0;
             // 
             // btnMenuInicial
@@ -60,7 +60,8 @@ namespace Streaming_BD
             // 
             // btnRemoverCliente
             // 
-            this.btnRemoverCliente.Location = new System.Drawing.Point(550, 370);
+            this.btnRemoverCliente.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnRemoverCliente.Location = new System.Drawing.Point((this.ClientSize.Width - this.btnRemoverCliente.Width) / 2, this.dgvClientes.Location.Y + this.dgvClientes.Height + 20);
             this.btnRemoverCliente.Name = "btnRemoverCliente";
             this.btnRemoverCliente.Size = new System.Drawing.Size(200, 40);
             this.btnRemoverCliente.TabIndex = 2;
@@ -72,7 +73,7 @@ namespace Streaming_BD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1100, 700);
             this.Controls.Add(this.dgvClientes);
             this.Controls.Add(this.btnMenuInicial);
             this.Controls.Add(this.btnRemoverCliente);
@@ -80,8 +81,33 @@ namespace Streaming_BD
             this.Text = "Lista de Clientes";
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).EndInit();
             this.ResumeLayout(false);
+            // Adicionar label de título acima do DataGridView
+            System.Windows.Forms.Label lblTitulo = new System.Windows.Forms.Label();
+            lblTitulo.Text = "Lista de Clientes";
+            lblTitulo.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            lblTitulo.AutoSize = true;
+            lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            lblTitulo.Location = new System.Drawing.Point((this.ClientSize.Width - lblTitulo.Width) / 2, 20);
+            lblTitulo.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.Controls.Add(lblTitulo);
+            // Ajustar DataGridView para ocupar toda a largura disponível
+            this.dgvClientes.Location = new System.Drawing.Point(30, 70);
+            this.dgvClientes.Size = new System.Drawing.Size(this.ClientSize.Width - 60, this.ClientSize.Height - 120);
+            this.dgvClientes.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            this.dgvClientes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.Resize += new System.EventHandler(this.Form3_Resize);
         }
 
         #endregion
+
+        // No final do arquivo, adicionar o método para atualizar a posição do botão
+        private void Form3_Resize(object sender, System.EventArgs e)
+        {
+            // Garante que o botão fique sempre centralizado e logo abaixo do DataGridView
+            this.btnRemoverCliente.Location = new System.Drawing.Point(
+                (this.ClientSize.Width - this.btnRemoverCliente.Width) / 2,
+                this.dgvClientes.Location.Y + this.dgvClientes.Height + 20
+            );
+        }
     }
 }
