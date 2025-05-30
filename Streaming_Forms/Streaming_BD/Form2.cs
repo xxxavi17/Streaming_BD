@@ -51,15 +51,15 @@ namespace Streaming_BD
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    // Inserir cliente
-                    string queryCliente = "INSERT INTO Streaming_Cliente (nome, email, data_nascimento, sexo) OUTPUT INSERTED.id_cliente VALUES (@nome, @email, @data_nascimento, @sexo)";
-                    using (SqlCommand cmd = new SqlCommand(queryCliente, conn))
+                    // Inserir cliente via stored procedure
+                    using (SqlCommand cmd = new SqlCommand("SP_AdicionarCliente", conn))
                     {
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@nome", txtNome.Text);
                         cmd.Parameters.AddWithValue("@email", txtEmail.Text);
                         cmd.Parameters.AddWithValue("@data_nascimento", dataNascimento);
                         cmd.Parameters.AddWithValue("@sexo", txtSexo.Text);
-                        idCliente = (int)cmd.ExecuteScalar();
+                        idCliente = Convert.ToInt32(cmd.ExecuteScalar());
                     }
                     // Só insere subscrição se duração > 0
                     if (duracaoMeses > 0)

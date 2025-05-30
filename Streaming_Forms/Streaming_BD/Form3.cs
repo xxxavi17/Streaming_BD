@@ -74,10 +74,10 @@ namespace Streaming_BD
                             cmd.Parameters.AddWithValue("@id_cliente", idCliente);
                             cmd.ExecuteNonQuery();
                         }
-                        // Remove cliente
-                        string deleteCliente = "DELETE FROM Streaming_Cliente WHERE id_cliente = @id_cliente";
-                        using (var cmd = new SqlCommand(deleteCliente, conn))
+                        // Remove cliente via stored procedure
+                        using (var cmd = new SqlCommand("SP_RemoverCliente", conn))
                         {
+                            cmd.CommandType = System.Data.CommandType.StoredProcedure;
                             cmd.Parameters.AddWithValue("@id_cliente", idCliente);
                             cmd.ExecuteNonQuery();
                         }
