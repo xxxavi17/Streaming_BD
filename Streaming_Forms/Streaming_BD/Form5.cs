@@ -24,7 +24,7 @@ namespace Streaming_BD
             {
                 conn.Open();
                 string query = @"
-                    SELECT c.id_conteudo, c.titulo, p.nome AS produtora, c.genero, c.average_rating
+                    SELECT c.id_conteudo, c.titulo, p.nome AS produtora, c.genero, c.ano, c.average_rating
                     FROM Streaming_Conteudo c
                     INNER JOIN Streaming_Produtora p ON c.id_produtora = p.id_produtora
                 ";

@@ -31,7 +31,7 @@ namespace Streaming_BD
                     MessageBox.Show("Data de nascimento inválida! Use o formato AAAA-MM-DD ou DD/MM/AAAA.");
                     return;
                 }
-                if (string.IsNullOrWhiteSpace(txtNome.Text) || string.IsNullOrWhiteSpace(txtEmail.Text) || string.IsNullOrWhiteSpace(txtSexo.Text))
+                if (string.IsNullOrWhiteSpace(txtNome.Text) || string.IsNullOrWhiteSpace(txtEmail.Text))
                 {
                     MessageBox.Show("Preencha todos os campos obrigatórios.");
                     return;
@@ -47,6 +47,12 @@ namespace Streaming_BD
                     MessageBox.Show("Insira uma duração válida em meses (>= 0).");
                     return;
                 }
+                if (cmbSexo.SelectedItem == null)
+                {
+                    MessageBox.Show("Selecione o género.");
+                    return;
+                }
+                string sexo = cmbSexo.SelectedItem.ToString() == "Masculino" ? "M" : "F";
                 int idCliente;
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
@@ -58,7 +64,7 @@ namespace Streaming_BD
                         cmd.Parameters.AddWithValue("@nome", txtNome.Text);
                         cmd.Parameters.AddWithValue("@email", txtEmail.Text);
                         cmd.Parameters.AddWithValue("@data_nascimento", dataNascimento);
-                        cmd.Parameters.AddWithValue("@sexo", txtSexo.Text);
+                        cmd.Parameters.AddWithValue("@sexo", sexo);
                         idCliente = Convert.ToInt32(cmd.ExecuteScalar());
                     }
                     // Só insere subscrição se duração > 0

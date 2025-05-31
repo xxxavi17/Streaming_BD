@@ -1,8 +1,10 @@
--- Stored Procedure para remover conteúdo
-CREATE PROCEDURE SP_RemoverConteudo
+CREATE OR ALTER PROCEDURE SP_RemoverConteudo
     @id_conteudo INT
 AS
 BEGIN
-    DELETE FROM Streaming_Conteudo WHERE id_conteudo = @id_conteudo
+    -- Remove primeiro de Streaming_Filme (ou outras tabelas filhas)
+    DELETE FROM Streaming_Filme WHERE id_conteudo = @id_conteudo;
+    -- Depois remove de Streaming_Conteudo
+    DELETE FROM Streaming_Conteudo WHERE id_conteudo = @id_conteudo;
 END
 GO

@@ -39,7 +39,6 @@ namespace Streaming_BD
             this.txtNome = new System.Windows.Forms.TextBox();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.txtDataNascimento = new System.Windows.Forms.TextBox();
-            this.txtSexo = new System.Windows.Forms.TextBox();
             this.txtDuracaoMeses = new System.Windows.Forms.TextBox();
             // Centralização e layout
             int textboxWidth = 250;
@@ -55,6 +54,7 @@ namespace Streaming_BD
             this.btnAdicionar = new System.Windows.Forms.Button();
             // Título
             this.lblTitulo = new System.Windows.Forms.Label();
+            this.cmbSexo = new System.Windows.Forms.ComboBox();
 
             // Centralização e layout (moved here to declare variables before use)
             int formWidth = this.ClientSize.Width > 0 ? this.ClientSize.Width : 500;
@@ -153,12 +153,14 @@ namespace Streaming_BD
             this.txtDataNascimento.Location = new System.Drawing.Point(centerX, startY + 2 * spacingY + labelHeight);
             this.txtDataNascimento.Size = new System.Drawing.Size(textboxWidth, textboxHeight);
             // Sexo
-            this.lblSexo.Text = "Sexo:";
+            this.lblSexo.Text = "Género:";
             this.lblSexo.Location = new System.Drawing.Point(centerX, startY + 3 * spacingY);
             this.lblSexo.Size = new System.Drawing.Size(textboxWidth, labelHeight);
             this.lblSexo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.txtSexo.Location = new System.Drawing.Point(centerX, startY + 3 * spacingY + labelHeight);
-            this.txtSexo.Size = new System.Drawing.Size(textboxWidth, textboxHeight);
+            this.cmbSexo.Location = new System.Drawing.Point(centerX, startY + 3 * spacingY + labelHeight);
+            this.cmbSexo.Size = new System.Drawing.Size(textboxWidth, textboxHeight);
+            this.cmbSexo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSexo.Items.AddRange(new object[] { "Masculino", "Feminino" });
             // Tipo de Subscrição
             this.lblTipoSub.Text = "Tipo de Subscrição:";
             this.lblTipoSub.Location = new System.Drawing.Point(centerX, startY + 4 * spacingY);
@@ -181,7 +183,7 @@ namespace Streaming_BD
             this.Controls.Add(this.lblDataNascimento);
             this.Controls.Add(this.txtDataNascimento);
             this.Controls.Add(this.lblSexo);
-            this.Controls.Add(this.txtSexo);
+            this.Controls.Add(this.cmbSexo);
             this.Controls.Add(this.lblTipoSub);
             this.Controls.Add(this.cmbTipoSub);
             this.Controls.Add(this.lblDuracaoMeses);
@@ -213,11 +215,11 @@ namespace Streaming_BD
         private System.Windows.Forms.TextBox txtDataNascimento;
         private System.Windows.Forms.Button btnMenuInicial;
         private System.Windows.Forms.Button btnAdicionar;
-        private System.Windows.Forms.TextBox txtSexo;
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.Label lblTipoSub;
         private System.Windows.Forms.Label lblDuracaoMeses;
         private System.Windows.Forms.TextBox txtDuracaoMeses;
         private System.Windows.Forms.ComboBox cmbTipoSub;
+        private System.Windows.Forms.ComboBox cmbSexo;
     }
 }
