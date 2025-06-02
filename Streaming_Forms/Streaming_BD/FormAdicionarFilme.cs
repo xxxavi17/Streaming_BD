@@ -9,6 +9,26 @@ namespace Streaming_BD
         public FormAdicionarFilme()
         {
             InitializeComponent();
+            this.Load += FormAdicionarFilme_Load;
+        }
+
+        private void FormAdicionarFilme_Load(object? sender, EventArgs e)
+        {
+            // Carregar produtoras conhecidas no ComboBox
+            string connectionString = "Server=tcp:mednat.ieeta.pt\\SQLSERVER,8101;Database=p1g11;User Id=p1g11;Password=Theoxavi11;TrustServerCertificate=True";
+            using (var conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                using (var cmd = new SqlCommand("SELECT nome FROM Streaming_Produtora ORDER BY nome", conn))
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        cmbProdutora.Items.Add(reader.GetString(0));
+                    }
+                }
+            }
+            cmbProdutora.SelectedIndex = -1;
         }
 
         private void btnMenuInicial_Click(object sender, EventArgs e)
@@ -28,7 +48,12 @@ namespace Streaming_BD
                 int ano = int.Parse(txtAno.Text);
                 int duracao = int.Parse(txtDuracao.Text);
                 int idadeMinima = int.Parse(txtIdadeMinima.Text);
-                string nomeProdutora = txtProdutora.Text;
+                string nomeProdutora = string.IsNullOrWhiteSpace(txtProdutora.Text) ? (cmbProdutora.SelectedItem?.ToString() ?? "") : txtProdutora.Text;
+                if (string.IsNullOrWhiteSpace(nomeProdutora))
+                {
+                    MessageBox.Show("Selecione ou escreva o nome da produtora.");
+                    return;
+                }
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
@@ -45,11 +70,17 @@ namespace Streaming_BD
                     }
                 }
                 MessageBox.Show("Filme adicionado com sucesso!");
+                this.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Erro ao adicionar filme: " + ex.Message);
             }
+        }
+
+        private void btnVoltar_Click(object? sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

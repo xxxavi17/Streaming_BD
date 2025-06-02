@@ -69,13 +69,13 @@ namespace Streaming_BD
             // 
             // btnMenuInicial
             // 
-            this.btnMenuInicial.Location = new System.Drawing.Point(30, this.ClientSize.Height - 60);
+            this.btnMenuInicial.Location = new System.Drawing.Point(30, 30);
             this.btnMenuInicial.Name = "btnMenuInicial";
             this.btnMenuInicial.Size = new System.Drawing.Size(120, 35);
             this.btnMenuInicial.TabIndex = 99;
             this.btnMenuInicial.Text = "Menu Inicial";
             this.btnMenuInicial.UseVisualStyleBackColor = true;
-            this.btnMenuInicial.Anchor = (System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left);
+            this.btnMenuInicial.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
             this.btnMenuInicial.Click += new System.EventHandler(this.btnMenuInicial_Click);
             this.Controls.Add(this.btnMenuInicial);
             // 
@@ -102,7 +102,7 @@ namespace Streaming_BD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 700); // altura aumentada para 700
+            this.ClientSize = new System.Drawing.Size(800, 950); // altura aumentada
             this.Controls.Add(this.btnMenuInicial);
             this.Controls.Add(this.btnAdicionar);
             this.Name = "Form2";
@@ -169,7 +169,7 @@ namespace Streaming_BD
             this.cmbTipoSub.Location = new System.Drawing.Point(centerX, startY + 4 * spacingY + labelHeight);
             this.cmbTipoSub.Size = new System.Drawing.Size(textboxWidth, textboxHeight);
             // Duração em meses
-            this.lblDuracaoMeses.Text = "Duração em meses:";
+            this.lblDuracaoMeses.Text = "Duração da Subscrição em meses:";
             this.lblDuracaoMeses.Location = new System.Drawing.Point(centerX, startY + 5 * spacingY);
             this.lblDuracaoMeses.Size = new System.Drawing.Size(textboxWidth, labelHeight);
             this.lblDuracaoMeses.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -196,12 +196,19 @@ namespace Streaming_BD
             this.btnAdicionar = new System.Windows.Forms.Button();
             this.btnAdicionar.Text = "Adicionar Cliente";
             this.btnAdicionar.Size = new System.Drawing.Size(180, 40);
-            this.btnAdicionar.Location = new System.Drawing.Point(centerX + textboxWidth + 40, startY + 5 * spacingY + labelHeight);
+            // Centralizar o botão horizontalmente abaixo dos campos
+            this.btnAdicionar.Location = new System.Drawing.Point((formWidth - 180) / 2, startY + 7 * spacingY + labelHeight);
             this.btnAdicionar.Name = "btnAdicionar";
             this.btnAdicionar.TabIndex = 101;
             this.btnAdicionar.UseVisualStyleBackColor = true;
             this.btnAdicionar.Click += new System.EventHandler(this.btnAdicionar_Click);
             this.Controls.Add(this.btnAdicionar);
+
+            // Placeholders para os campos de preenchimento
+            this.txtNome.PlaceholderText = "Ex: João Silva";
+            this.txtEmail.PlaceholderText = "Ex: joao@email.com";
+            this.txtDataNascimento.PlaceholderText = "Ex: 2000-01-01";
+            this.txtDuracaoMeses.PlaceholderText = "Ex: 12";
         }
 
         #endregion

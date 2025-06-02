@@ -24,7 +24,8 @@ namespace Streaming_BD
             {
                 conn.Open();
                 string query = @"
-                    SELECT c.id_conteudo, c.titulo, p.nome AS produtora, c.genero, c.ano, c.average_rating
+                    SELECT c.id_conteudo, c.titulo, p.nome AS produtora, c.genero, c.ano,
+                           dbo.UDF_AverageRating(c.id_conteudo) AS average_rating
                     FROM Streaming_Conteudo c
                     INNER JOIN Streaming_Produtora p ON c.id_produtora = p.id_produtora
                 ";
@@ -40,7 +41,7 @@ namespace Streaming_BD
             dgvConteudos.CellFormatting += dgvConteudos_CellFormatting;
         }
 
-        private void dgvConteudos_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void dgvConteudos_CellFormatting(object? sender, DataGridViewCellFormattingEventArgs e)
         {
             if (dgvConteudos.Columns[e.ColumnIndex].Name == "average_rating" && e.Value != null && e.Value != DBNull.Value)
             {
