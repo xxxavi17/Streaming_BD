@@ -26,12 +26,3 @@ INSERT INTO Streaming_Rating (estrelas, id_cliente, id_conteudo) VALUES (ROUND(R
 INSERT INTO Streaming_Rating (estrelas, id_cliente, id_conteudo) VALUES (ROUND(RAND(CHECKSUM(NEWID()))*4+1,0), 40, 1);
 INSERT INTO Streaming_Rating (estrelas, id_cliente, id_conteudo) VALUES (ROUND(RAND(CHECKSUM(NEWID()))*4+1,0), 40, 2);
 INSERT INTO Streaming_Rating (estrelas, id_cliente, id_conteudo) VALUES (ROUND(RAND(CHECKSUM(NEWID()))*4+1,0), 40, 3);
-
--- Atualizar o average_rating de cada filme
-UPDATE Streaming_Conteudo
-SET average_rating = (
-    SELECT CAST(AVG(CAST(estrelas AS FLOAT)) AS DECIMAL(2,1))
-    FROM Streaming_Rating r
-    WHERE r.id_conteudo = Streaming_Conteudo.id_conteudo
-)
-WHERE id_conteudo IN (1,2,3);
