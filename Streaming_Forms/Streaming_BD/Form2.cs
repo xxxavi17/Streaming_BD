@@ -41,18 +41,22 @@ namespace Streaming_BD
                     MessageBox.Show("Selecione o tipo de subscrição.");
                     return;
                 }
-                int duracaoMeses;
-                if (!int.TryParse(txtDuracaoMeses.Text, out duracaoMeses) || duracaoMeses < 0)
-                {
-                    MessageBox.Show("Insira uma duração válida em meses (>= 0).");
-                    return;
-                }
                 if (cmbSexo.SelectedItem == null)
                 {
                     MessageBox.Show("Selecione o género.");
                     return;
                 }
-                string sexo = cmbSexo.SelectedItem.ToString() == "Masculino" ? "M" : "F";
+                string sexo = cmbSexo.SelectedItem?.ToString() ?? string.Empty;
+                string tipoSub = cmbTipoSub.SelectedItem?.ToString() ?? string.Empty;
+                int duracaoMeses = 0;
+                if (tipoSub != "Sem Subscrição")
+                {
+                    if (!int.TryParse(txtDuracaoMeses.Text, out duracaoMeses) || duracaoMeses <= 0)
+                    {
+                        MessageBox.Show("Indique uma duração válida (em meses) para a subscrição.");
+                        return;
+                    }
+                }
                 int idCliente;
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
@@ -67,21 +71,27 @@ namespace Streaming_BD
                         cmd.Parameters.AddWithValue("@sexo", sexo);
                         idCliente = Convert.ToInt32(cmd.ExecuteScalar());
                     }
-                    // Só insere subscrição se duração > 0
-                    if (duracaoMeses > 0)
+                    if (tipoSub != "Sem Subscrição" && duracaoMeses > 0)
                     {
                         DateTime dataInicio = DateTime.Now;
                         DateTime dataFim = dataInicio.AddMonths(duracaoMeses);
-                        // O estado será atualizado pela trigger no SQL Server
-                        string querySub = "INSERT INTO Streaming_Subscricao (tipo_sub, estado, duracao_meses, id_cliente, data_inicio, data_fim) VALUES (@tipo_sub, @estado, @duracao_meses, @id_cliente, @data_inicio, @data_fim)";
-                        using (SqlCommand cmd = new SqlCommand(querySub, conn))
+                        using (SqlCommand cmd = new SqlCommand("INSERT INTO Streaming_Subscricao (tipo_sub, estado, duracao_meses, id_cliente, data_inicio, data_fim) VALUES (@tipo_sub, 'ativa', @duracao_meses, @id_cliente, @data_inicio, @data_fim)", conn))
                         {
-                            cmd.Parameters.AddWithValue("@tipo_sub", cmbTipoSub.SelectedItem.ToString());
-                            cmd.Parameters.AddWithValue("@estado", "ativa"); // Valor temporário, trigger ajusta
+                            cmd.Parameters.AddWithValue("@tipo_sub", tipoSub);
                             cmd.Parameters.AddWithValue("@duracao_meses", duracaoMeses);
                             cmd.Parameters.AddWithValue("@id_cliente", idCliente);
                             cmd.Parameters.AddWithValue("@data_inicio", dataInicio);
                             cmd.Parameters.AddWithValue("@data_fim", dataFim);
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                    else if (tipoSub == "Sem Subscrição")
+                    {
+                        // Insere subscrição inativa sem datas
+                        using (SqlCommand cmd = new SqlCommand("INSERT INTO Streaming_Subscricao (tipo_sub, estado, duracao_meses, id_cliente) VALUES (@tipo_sub, 'inativa', 0, @id_cliente)", conn))
+                        {
+                            cmd.Parameters.AddWithValue("@tipo_sub", tipoSub);
+                            cmd.Parameters.AddWithValue("@id_cliente", idCliente);
                             cmd.ExecuteNonQuery();
                         }
                     }

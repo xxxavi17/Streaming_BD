@@ -6,6 +6,8 @@ namespace Streaming_BD
 {
     public partial class Form3 : Form
     {
+        private string connectionString = "Server=tcp:mednat.ieeta.pt\\SQLSERVER,8101;Database=p1g11;User Id=p1g11;Password=Theoxavi11;TrustServerCertificate=True";
+
         public Form3()
         {
             InitializeComponent();
@@ -19,7 +21,6 @@ namespace Streaming_BD
 
         private void CarregarClientes()
         {
-            string connectionString = "Server=tcp:mednat.ieeta.pt\\SQLSERVER,8101;Database=p1g11;User Id=p1g11;Password=Theoxavi11;TrustServerCertificate=True";
             using (var conn = new SqlConnection(connectionString))
             {
                 conn.Open();
@@ -63,7 +64,6 @@ namespace Streaming_BD
                 if (result == DialogResult.Yes)
                 {
                     int idCliente = Convert.ToInt32(dgvClientes.SelectedRows[0].Cells["id_cliente"].Value);
-                    string connectionString = "Server=tcp:mednat.ieeta.pt\\SQLSERVER,8101;Database=p1g11;User Id=p1g11;Password=Theoxavi11;TrustServerCertificate=True";
                     using (var conn = new SqlConnection(connectionString))
                     {
                         conn.Open();
@@ -96,6 +96,36 @@ namespace Streaming_BD
             else
             {
                 MessageBox.Show("Selecione um cliente para remover.");
+            }
+        }
+
+        // Botão: Adicionar Cliente
+        private void btnAdicionarCliente_Click(object? sender, EventArgs e)
+        {
+            var form2 = new Form2();
+            var result = form2.ShowDialog();
+            CarregarClientes();
+        }
+
+        private void btnEditarCliente_Click(object? sender, EventArgs e)
+        {
+            if (dgvClientes.SelectedRows.Count > 0)
+            {
+                int idCliente = Convert.ToInt32(dgvClientes.SelectedRows[0].Cells["id_cliente"].Value);
+                string nome = dgvClientes.SelectedRows[0].Cells["nome"].Value.ToString() ?? "";
+                string email = dgvClientes.SelectedRows[0].Cells["email"].Value.ToString() ?? "";
+                string tipoSub = dgvClientes.SelectedRows[0].Cells["Tipo Subscrição"].Value.ToString() ?? "";
+                string estado = dgvClientes.SelectedRows[0].Cells["Estado"].Value.ToString() ?? "";
+                var formEditar = new FormEditarCliente(idCliente, nome, email, tipoSub, estado, connectionString);
+                var result = formEditar.ShowDialog();
+                if (formEditar.ClienteEditado)
+                {
+                    CarregarClientes();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Selecione um cliente para editar.");
             }
         }
     }

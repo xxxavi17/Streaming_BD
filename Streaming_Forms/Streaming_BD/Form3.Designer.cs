@@ -4,6 +4,8 @@ namespace Streaming_BD
     {
         private System.Windows.Forms.DataGridView dgvClientes;
         private System.Windows.Forms.Button btnMenuInicial;
+        private System.Windows.Forms.Button btnAdicionarCliente;
+        private System.Windows.Forms.Button btnEditarCliente;
         private System.Windows.Forms.Button btnRemoverCliente;
 
         /// <summary>
@@ -34,9 +36,33 @@ namespace Streaming_BD
         {
             this.dgvClientes = new System.Windows.Forms.DataGridView();
             this.btnMenuInicial = new System.Windows.Forms.Button();
+            // Botão Adicionar Cliente
+            this.btnAdicionarCliente = new System.Windows.Forms.Button();
+            this.btnAdicionarCliente.Location = new System.Drawing.Point(20, this.ClientSize.Height - 60);
+            this.btnAdicionarCliente.Size = new System.Drawing.Size(180, 40);
+            this.btnAdicionarCliente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnAdicionarCliente.Text = "Adicionar Cliente";
+            this.btnAdicionarCliente.UseVisualStyleBackColor = true;
+            this.btnAdicionarCliente.Click += new System.EventHandler(this.btnAdicionarCliente_Click);
+            this.Controls.Add(this.btnAdicionarCliente);
+            // Botão Editar Cliente
+            this.btnEditarCliente = new System.Windows.Forms.Button();
+            this.btnEditarCliente.Location = new System.Drawing.Point(220, this.ClientSize.Height - 60);
+            this.btnEditarCliente.Size = new System.Drawing.Size(180, 40);
+            this.btnEditarCliente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnEditarCliente.Text = "Editar Cliente";
+            this.btnEditarCliente.UseVisualStyleBackColor = true;
+            this.btnEditarCliente.Click += new System.EventHandler(this.btnEditarCliente_Click);
+            this.Controls.Add(this.btnEditarCliente);
+            // Botão Remover Cliente
             this.btnRemoverCliente = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
-            this.SuspendLayout();
+            this.btnRemoverCliente.Location = new System.Drawing.Point(420, this.ClientSize.Height - 60);
+            this.btnRemoverCliente.Size = new System.Drawing.Size(180, 40);
+            this.btnRemoverCliente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnRemoverCliente.Text = "Remover Cliente";
+            this.btnRemoverCliente.UseVisualStyleBackColor = true;
+            this.btnRemoverCliente.Click += new System.EventHandler(this.btnRemoverCliente_Click);
+            this.Controls.Add(this.btnRemoverCliente);
             // 
             // dgvClientes
             // 
@@ -57,17 +83,6 @@ namespace Streaming_BD
             this.btnMenuInicial.Text = "Menu Inicial";
             this.btnMenuInicial.UseVisualStyleBackColor = true;
             this.btnMenuInicial.Click += new System.EventHandler(this.btnMenuInicial_Click);
-            // 
-            // btnRemoverCliente
-            // 
-            this.btnRemoverCliente.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnRemoverCliente.Location = new System.Drawing.Point((this.ClientSize.Width - this.btnRemoverCliente.Width) / 2, this.dgvClientes.Location.Y + this.dgvClientes.Height + 20);
-            this.btnRemoverCliente.Name = "btnRemoverCliente";
-            this.btnRemoverCliente.Size = new System.Drawing.Size(200, 40);
-            this.btnRemoverCliente.TabIndex = 2;
-            this.btnRemoverCliente.Text = "Remover Cliente";
-            this.btnRemoverCliente.UseVisualStyleBackColor = true;
-            this.btnRemoverCliente.Click += new System.EventHandler(this.btnRemoverCliente_Click);
             // 
             // Form3
             // 
@@ -103,11 +118,10 @@ namespace Streaming_BD
         // No final do arquivo, adicionar o método para atualizar a posição do botão
         private void Form3_Resize(object sender, System.EventArgs e)
         {
-            // Garante que o botão fique sempre centralizado e logo abaixo do DataGridView
-            this.btnRemoverCliente.Location = new System.Drawing.Point(
-                (this.ClientSize.Width - this.btnRemoverCliente.Width) / 2,
-                this.dgvClientes.Location.Y + this.dgvClientes.Height + 20
-            );
+            int baseY = this.dgvClientes.Location.Y + this.dgvClientes.Height + 20;
+            this.btnAdicionarCliente.Location = new System.Drawing.Point(20, baseY);
+            this.btnEditarCliente.Location = new System.Drawing.Point(220, baseY);
+            this.btnRemoverCliente.Location = new System.Drawing.Point(420, baseY);
         }
     }
 }

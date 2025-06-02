@@ -47,7 +47,7 @@ namespace Streaming_BD
             this.cmbTipoSub = new System.Windows.Forms.ComboBox();
             this.cmbTipoSub.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTipoSub.Items.Clear();
-            this.cmbTipoSub.Items.AddRange(new object[] { "Standart", "Premium" });
+            this.cmbTipoSub.Items.AddRange(new object[] { "Standart", "Premium", "Sem Subscrição" });
             this.cmbTipoSub.Size = new System.Drawing.Size(textboxWidth, textboxHeight);
             // Buttons
             this.btnMenuInicial = new System.Windows.Forms.Button();
@@ -122,7 +122,7 @@ namespace Streaming_BD
             // ComboBox Tipo de Subscrição
             this.cmbTipoSub.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTipoSub.Items.Clear();
-            this.cmbTipoSub.Items.AddRange(new object[] { "Standart", "Premium" });
+            this.cmbTipoSub.Items.AddRange(new object[] { "Standart", "Premium", "Sem Subscrição" });
             this.cmbTipoSub.Size = new System.Drawing.Size(textboxWidth, textboxHeight);
 
             // Botão Adicionar Cliente à direita
