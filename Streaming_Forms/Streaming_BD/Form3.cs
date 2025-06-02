@@ -67,6 +67,13 @@ namespace Streaming_BD
                     using (var conn = new SqlConnection(connectionString))
                     {
                         conn.Open();
+                        // Remove ratings do cliente antes de remover subscrições e cliente
+                        string deleteRatings = "DELETE FROM Streaming_Rating WHERE id_cliente = @id_cliente";
+                        using (var cmd = new SqlCommand(deleteRatings, conn))
+                        {
+                            cmd.Parameters.AddWithValue("@id_cliente", idCliente);
+                            cmd.ExecuteNonQuery();
+                        }
                         // Remove subscrições primeiro (se existirem)
                         string deleteSub = "DELETE FROM Streaming_Subscricao WHERE id_cliente = @id_cliente";
                         using (var cmd = new SqlCommand(deleteSub, conn))
