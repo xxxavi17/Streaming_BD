@@ -6,6 +6,8 @@ namespace Streaming_BD
 {
     public partial class Form5 : Form
     {
+        private string connectionString = "Server=tcp:mednat.ieeta.pt\\SQLSERVER,8101;Database=p1g11;User Id=p1g11;Password=Theoxavi11;TrustServerCertificate=True";
+
         public Form5()
         {
             InitializeComponent();
@@ -14,26 +16,53 @@ namespace Streaming_BD
         protected override void OnLoad(System.EventArgs e)
         {
             base.OnLoad(e);
-            CarregarConteudos();
+            CarregarGeneros();
+            CarregarFilmes();
         }
 
-        private void CarregarConteudos()
+        private void CarregarGeneros()
         {
-            string connectionString = "Server=tcp:mednat.ieeta.pt\\SQLSERVER,8101;Database=p1g11;User Id=p1g11;Password=Theoxavi11;TrustServerCertificate=True";
+            comboFiltroGenero.Items.Clear();
+            comboFiltroGenero.Items.Add("Todos");
             using (var conn = new SqlConnection(connectionString))
             {
                 conn.Open();
-                string query = @"
-                    SELECT c.id_conteudo, c.titulo, p.nome AS produtora, c.genero, c.ano,
-                           dbo.UDF_AverageRating(c.id_conteudo) AS average_rating
-                    FROM Streaming_Conteudo c
-                    INNER JOIN Streaming_Produtora p ON c.id_produtora = p.id_produtora
-                ";
-                using (var adapter = new SqlDataAdapter(query, conn))
+                using (var cmd = new SqlCommand("SELECT DISTINCT genero FROM Streaming_Conteudo c INNER JOIN Streaming_Filme f ON c.id_conteudo = f.id_conteudo ORDER BY genero", conn))
+                using (var reader = cmd.ExecuteReader())
                 {
-                    DataTable dt = new DataTable();
-                    adapter.Fill(dt);
-                    dgvConteudos.DataSource = dt;
+                    while (reader.Read())
+                    {
+                        comboFiltroGenero.Items.Add(reader.GetString(0));
+                    }
+                }
+            }
+            comboFiltroGenero.SelectedIndex = 0;
+        }
+
+        private void comboFiltroGenero_SelectedIndexChanged(object? sender, EventArgs e)
+        {
+            CarregarFilmes();
+        }
+
+        private void CarregarFilmes()
+        {
+            using (var conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string genero = comboFiltroGenero?.SelectedItem?.ToString() ?? "Todos";
+                using (var cmd = new SqlCommand("SP_FiltrarFilmesPorGenero", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    if (genero == "Todos")
+                        cmd.Parameters.AddWithValue("@genero", DBNull.Value);
+                    else
+                        cmd.Parameters.AddWithValue("@genero", genero);
+                    using (var adapter = new SqlDataAdapter(cmd))
+                    {
+                        DataTable dt = new DataTable();
+                        adapter.Fill(dt);
+                        dgvConteudos.DataSource = dt;
+                    }
                 }
             }
             // Adicionar evento para formatar a coluna average_rating
@@ -61,33 +90,63 @@ namespace Streaming_BD
             this.Close();
         }
 
-        private void btnRemoverConteudo_Click(object sender, EventArgs e)
+        private void btnAdicionarFilme_Click(object sender, EventArgs e)
+        {
+            var formAdicionar = new FormAdicionarFilme();
+            var result = formAdicionar.ShowDialog();
+            CarregarFilmes();
+        }
+
+        private void btnEditarFilme_Click(object sender, EventArgs e)
         {
             if (dgvConteudos.SelectedRows.Count > 0)
             {
-                var result = MessageBox.Show("Tem a certeza que deseja remover o conteúdo selecionado?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                int idConteudo = Convert.ToInt32(dgvConteudos.SelectedRows[0].Cells["id_conteudo"].Value);
+                string titulo = dgvConteudos.SelectedRows[0].Cells["titulo"].Value.ToString() ?? "";
+                string genero = dgvConteudos.SelectedRows[0].Cells["genero"].Value.ToString() ?? "";
+                string produtora = dgvConteudos.SelectedRows[0].Cells["produtora"].Value.ToString() ?? "";
+                int duracao = Convert.ToInt32(dgvConteudos.SelectedRows[0].Cells["duracao"].Value);
+                var formEditar = new FormEditarFilme(idConteudo, titulo, genero, produtora, duracao, connectionString);
+                var result = formEditar.ShowDialog();
+                if (formEditar.FilmeEditado)
+                {
+                    CarregarFilmes();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Selecione um filme para editar.");
+            }
+        }
+
+        private void btnRemoverFilme_Click(object sender, EventArgs e)
+        {
+            if (dgvConteudos.SelectedRows.Count > 0)
+            {
+                var result = MessageBox.Show("Tem a certeza que deseja remover o filme selecionado?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
                     int idConteudo = Convert.ToInt32(dgvConteudos.SelectedRows[0].Cells["id_conteudo"].Value);
-                    string connectionString = "Server=tcp:mednat.ieeta.pt\\SQLSERVER,8101;Database=p1g11;User Id=p1g11;Password=Theoxavi11;TrustServerCertificate=True";
-                    using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connectionString))
+                    using (var conn = new SqlConnection(connectionString))
                     {
                         conn.Open();
-                        using (var cmd = new Microsoft.Data.SqlClient.SqlCommand("SP_RemoverConteudo", conn))
+                        using (var cmd = new SqlCommand("SP_RemoverFilme", conn))
                         {
                             cmd.CommandType = System.Data.CommandType.StoredProcedure;
                             cmd.Parameters.AddWithValue("@id_conteudo", idConteudo);
                             cmd.ExecuteNonQuery();
                         }
                     }
-                    MessageBox.Show("Conteúdo removido com sucesso!");
-                    CarregarConteudos();
+                    MessageBox.Show("Filme removido com sucesso!");
+                    CarregarFilmes();
                 }
             }
             else
             {
-                MessageBox.Show("Selecione um conteúdo para remover.");
+                MessageBox.Show("Selecione um filme para remover.");
             }
         }
+
+        // Removed duplicate Form5_Resize method to resolve compile error.
     }
 }
