@@ -21,6 +21,8 @@ namespace Streaming_BD
             this.btnRemoverFilme = new System.Windows.Forms.Button();
             this.lblFiltroGenero = new System.Windows.Forms.Label();
             this.comboFiltroGenero = new System.Windows.Forms.ComboBox();
+            this.lblFiltroProdutora = new System.Windows.Forms.Label();
+            this.comboFiltroProdutora = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConteudos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -102,6 +104,23 @@ namespace Streaming_BD
             this.comboFiltroGenero.SelectedIndexChanged += new System.EventHandler(this.comboFiltroGenero_SelectedIndexChanged);
             this.Controls.Add(this.comboFiltroGenero);
             // 
+            // lblFiltroProdutora
+            // 
+            this.lblFiltroProdutora = new System.Windows.Forms.Label();
+            this.lblFiltroProdutora.Text = "Filtrar por produtora:";
+            this.lblFiltroProdutora.Size = new System.Drawing.Size(150, 20);
+            this.lblFiltroProdutora.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+            this.Controls.Add(this.lblFiltroProdutora);
+            // 
+            // comboFiltroProdutora
+            // 
+            this.comboFiltroProdutora = new System.Windows.Forms.ComboBox();
+            this.comboFiltroProdutora.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboFiltroProdutora.Size = new System.Drawing.Size(180, 28);
+            this.comboFiltroProdutora.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+            this.comboFiltroProdutora.SelectedIndexChanged += new System.EventHandler(this.comboFiltroProdutora_SelectedIndexChanged);
+            this.Controls.Add(this.comboFiltroProdutora);
+            // 
             // Form5
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -134,6 +153,8 @@ namespace Streaming_BD
 
             // Evento de resize para atualizar posição dos botões
             this.Resize += new System.EventHandler(this.Form5_Resize);
+            // Garantir alinhamento inicial dos controles
+            this.Form5_Resize(null, null);
         }
 
         private System.Windows.Forms.DataGridView dgvConteudos;
@@ -144,24 +165,51 @@ namespace Streaming_BD
         private System.Windows.Forms.Button btnRemoverFilme;
         private System.Windows.Forms.Label lblFiltroGenero;
         private System.Windows.Forms.ComboBox comboFiltroGenero;
+        private System.Windows.Forms.Label lblFiltroProdutora;
+        private System.Windows.Forms.ComboBox comboFiltroProdutora;
 
         // Removed duplicate Form5_Resize method to resolve ambiguity error.
 
         private void Form5_Resize(object sender, System.EventArgs e)
         {
-            // Atualiza a posição e tamanho dos controles ao redimensionar o formulário
+            int padding = 30;
+            int comboWidth = 180;
+            int labelGeneroWidth = 130;
+            int labelProdutoraWidth = 150;
+            int spacing = 10;
+            int formWidth = this.ClientSize.Width;
+            int yProdutora = 30;
+            int yGenero = yProdutora + 38; // espaço vertical entre filtros
+            // Produtora (no topo à direita)
+            lblFiltroProdutora.Location = new System.Drawing.Point(formWidth - labelProdutoraWidth - comboWidth - spacing - padding, yProdutora + 4);
+            comboFiltroProdutora.Location = new System.Drawing.Point(formWidth - comboWidth - padding, yProdutora);
+            // Gênero (abaixo do filtro de produtora, alinhado à direita)
+            lblFiltroGenero.Location = new System.Drawing.Point(formWidth - labelGeneroWidth - comboWidth - spacing - padding, yGenero + 4);
+            comboFiltroGenero.Location = new System.Drawing.Point(formWidth - comboWidth - padding, yGenero);
+            // Botões
+            int buttonY = this.ClientSize.Height - 50;
+            int buttonHeight = 40;
+            int buttonWidth = 180;
+            int buttonSpacing = 20;
             if (btnAdicionarFilme != null)
-                btnAdicionarFilme.Location = new System.Drawing.Point(20, this.ClientSize.Height - 60);
+                btnAdicionarFilme.Location = new System.Drawing.Point(20, buttonY);
             if (btnEditarFilme != null)
-                btnEditarFilme.Location = new System.Drawing.Point(220, this.ClientSize.Height - 60);
+                btnEditarFilme.Location = new System.Drawing.Point(20 + buttonWidth + buttonSpacing, buttonY);
             if (btnRemoverFilme != null)
-                btnRemoverFilme.Location = new System.Drawing.Point(420, this.ClientSize.Height - 60);
+                btnRemoverFilme.Location = new System.Drawing.Point(20 + 2 * (buttonWidth + buttonSpacing), buttonY);
+            if (btnAdicionarFilme != null)
+                btnAdicionarFilme.Size = new System.Drawing.Size(buttonWidth, buttonHeight);
+            if (btnEditarFilme != null)
+                btnEditarFilme.Size = new System.Drawing.Size(buttonWidth, buttonHeight);
+            if (btnRemoverFilme != null)
+                btnRemoverFilme.Size = new System.Drawing.Size(buttonWidth, buttonHeight);
+            // DataGridView - mover para baixo para dar espaço aos filtros
+            int gridTop = yGenero + 38; // espaço após o segundo filtro
             if (dgvConteudos != null)
-                dgvConteudos.Size = new System.Drawing.Size(this.ClientSize.Width - 60, this.ClientSize.Height - 120);
-            if (lblFiltroGenero != null)
-                lblFiltroGenero.Location = new System.Drawing.Point(this.ClientSize.Width - 370, 34);
-            if (comboFiltroGenero != null)
-                comboFiltroGenero.Location = new System.Drawing.Point(this.ClientSize.Width - 220, 30);
+            {
+                dgvConteudos.Location = new System.Drawing.Point(30, gridTop);
+                dgvConteudos.Size = new System.Drawing.Size(this.ClientSize.Width - 60, this.ClientSize.Height - gridTop - 70);
+            }
         }
     }
 }

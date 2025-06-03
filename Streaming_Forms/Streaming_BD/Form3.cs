@@ -7,20 +7,11 @@ namespace Streaming_BD
     public partial class Form3 : Form
     {
         private string connectionString = "Server=tcp:mednat.ieeta.pt\\SQLSERVER,8101;Database=p1g11;User Id=p1g11;Password=Theoxavi11;TrustServerCertificate=True";
-        private ComboBox comboFiltroSubscricao;
 
         public Form3()
         {
             InitializeComponent();
-            // Adiciona ComboBox de filtro de subscrição
-            comboFiltroSubscricao = new ComboBox();
-            comboFiltroSubscricao.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboFiltroSubscricao.Items.AddRange(new object[] { "Todos", "Premium", "Standart", "Sem Subscrição" });
-            comboFiltroSubscricao.SelectedIndex = 0;
-            comboFiltroSubscricao.Location = new System.Drawing.Point(30, 30);
-            comboFiltroSubscricao.Size = new System.Drawing.Size(180, 28);
-            comboFiltroSubscricao.SelectedIndexChanged += ComboFiltroSubscricao_SelectedIndexChanged;
-            this.Controls.Add(comboFiltroSubscricao);
+            // Remover criação manual duplicada do comboFiltroSubscricao
         }
 
         protected override void OnLoad(System.EventArgs e)
@@ -34,19 +25,31 @@ namespace Streaming_BD
             CarregarClientes();
         }
 
+        private void ComboFiltroSexo_SelectedIndexChanged(object? sender, EventArgs e)
+        {
+            CarregarClientes();
+        }
+
         private void CarregarClientes()
         {
             using (var conn = new SqlConnection(connectionString))
             {
                 conn.Open();
                 string filtro = comboFiltroSubscricao?.SelectedItem?.ToString() ?? "Todos";
-                using (var cmd = new SqlCommand("SP_FiltrarClientesPorSubscricao", conn))
+                string sexo = comboFiltroSexo?.SelectedItem?.ToString() ?? "Todos";
+                using (var cmd = new SqlCommand("SP_FiltrarClientesPorSubscricaoESexo", conn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     if (filtro == "Todos")
                         cmd.Parameters.AddWithValue("@tipo_sub", DBNull.Value);
                     else
                         cmd.Parameters.AddWithValue("@tipo_sub", filtro);
+                    if (sexo == "Todos")
+                        cmd.Parameters.AddWithValue("@sexo", DBNull.Value);
+                    else if (sexo == "Masculino")
+                        cmd.Parameters.AddWithValue("@sexo", "M");
+                    else if (sexo == "Feminino")
+                        cmd.Parameters.AddWithValue("@sexo", "F");
                     using (var adapter = new SqlDataAdapter(cmd))
                     {
                         DataTable dt = new DataTable();

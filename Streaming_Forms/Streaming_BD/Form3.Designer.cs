@@ -7,6 +7,11 @@ namespace Streaming_BD
         private System.Windows.Forms.Button btnAdicionarCliente;
         private System.Windows.Forms.Button btnEditarCliente;
         private System.Windows.Forms.Button btnRemoverCliente;
+        private System.Windows.Forms.Label lblTitulo;
+        private System.Windows.Forms.Label lblFiltroSubscricao;
+        private System.Windows.Forms.ComboBox comboFiltroSubscricao;
+        private System.Windows.Forms.Label lblFiltroSexo;
+        private System.Windows.Forms.ComboBox comboFiltroSexo;
 
         /// <summary>
         /// Required designer variable.
@@ -84,6 +89,50 @@ namespace Streaming_BD
             this.btnMenuInicial.UseVisualStyleBackColor = true;
             this.btnMenuInicial.Click += new System.EventHandler(this.btnMenuInicial_Click);
             // 
+            // Título
+            // 
+            this.lblTitulo = new System.Windows.Forms.Label();
+            this.lblTitulo.Text = "Lista de Clientes";
+            this.lblTitulo.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblTitulo.AutoSize = true;
+            this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblTitulo.Location = new System.Drawing.Point((1100 - 300) / 2, 20);
+            this.lblTitulo.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.Controls.Add(this.lblTitulo);
+            // Filtro por Subscrição (label + ComboBox)
+            // 
+            this.lblFiltroSubscricao = new System.Windows.Forms.Label();
+            this.lblFiltroSubscricao.Text = "Filtrar por subscrição:";
+            this.lblFiltroSubscricao.Size = new System.Drawing.Size(150, 20);
+            this.lblFiltroSubscricao.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+            this.Controls.Add(this.lblFiltroSubscricao);
+
+            this.comboFiltroSubscricao = new System.Windows.Forms.ComboBox();
+            this.comboFiltroSubscricao.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboFiltroSubscricao.Size = new System.Drawing.Size(180, 28);
+            this.comboFiltroSubscricao.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+            this.comboFiltroSubscricao.Items.AddRange(new object[] { "Todos", "Premium", "Standart", "Sem Subscrição" });
+            this.comboFiltroSubscricao.SelectedIndex = 0;
+            this.comboFiltroSubscricao.SelectedIndexChanged += new System.EventHandler(this.ComboFiltroSubscricao_SelectedIndexChanged);
+            this.Controls.Add(this.comboFiltroSubscricao);
+            // Filtro de sexo (label + ComboBox)
+            // 
+            this.lblFiltroSexo = new System.Windows.Forms.Label();
+            this.lblFiltroSexo.Text = "Filtrar por sexo:";
+            this.lblFiltroSexo.Size = new System.Drawing.Size(120, 20);
+            this.lblFiltroSexo.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+            this.Controls.Add(this.lblFiltroSexo);
+
+            this.comboFiltroSexo = new System.Windows.Forms.ComboBox();
+            this.comboFiltroSexo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboFiltroSexo.Size = new System.Drawing.Size(120, 28);
+            this.comboFiltroSexo.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+            this.comboFiltroSexo.Items.AddRange(new object[] { "Todos", "Masculino", "Feminino" });
+            this.comboFiltroSexo.SelectedIndex = 0;
+            this.comboFiltroSexo.SelectedIndexChanged += new System.EventHandler(this.ComboFiltroSexo_SelectedIndexChanged);
+            this.Controls.Add(this.comboFiltroSexo);
+
+            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -96,32 +145,65 @@ namespace Streaming_BD
             this.Text = "Lista de Clientes";
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).EndInit();
             this.ResumeLayout(false);
-            // Adicionar label de título acima do DataGridView
-            System.Windows.Forms.Label lblTitulo = new System.Windows.Forms.Label();
-            lblTitulo.Text = "Lista de Clientes";
-            lblTitulo.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            lblTitulo.AutoSize = true;
-            lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            lblTitulo.Location = new System.Drawing.Point((this.ClientSize.Width - lblTitulo.Width) / 2, 20);
-            lblTitulo.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.Controls.Add(lblTitulo);
             // Ajustar DataGridView para ocupar toda a largura disponível
             this.dgvClientes.Location = new System.Drawing.Point(30, 70);
             this.dgvClientes.Size = new System.Drawing.Size(this.ClientSize.Width - 60, this.ClientSize.Height - 120);
             this.dgvClientes.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             this.dgvClientes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            // Evento de resize para atualizar posição dos controles
             this.Resize += new System.EventHandler(this.Form3_Resize);
+            // Garantir alinhamento inicial dos controles
+            this.Form3_Resize(null, null);
         }
 
         #endregion
 
-        // No final do arquivo, adicionar o método para atualizar a posição do botão
         private void Form3_Resize(object sender, System.EventArgs e)
         {
-            int baseY = this.dgvClientes.Location.Y + this.dgvClientes.Height + 20;
-            this.btnAdicionarCliente.Location = new System.Drawing.Point(20, baseY);
-            this.btnEditarCliente.Location = new System.Drawing.Point(220, baseY);
-            this.btnRemoverCliente.Location = new System.Drawing.Point(420, baseY);
+            int padding = 30;
+            int filtroWidth = 150 + 10 + 180; // lblFiltroSubscricao + espaço + comboFiltroSubscricao
+            int tituloWidth = lblTitulo.Width;
+            int formWidth = this.ClientSize.Width;
+            int buttonY = this.ClientSize.Height - 50; // 10px mais abaixo
+            int buttonHeight = 40;
+            int buttonWidth = 180;
+            int buttonSpacing = 20;
+            int filtrosAltura = 30 + comboFiltroSubscricao.Height + 8 + comboFiltroSexo.Height + 8; // altura dos filtros + espaçamento
+            int gridTop = filtrosAltura + 20; // espaço extra após filtros
+
+            // Centralizar título
+            if (lblTitulo != null)
+                lblTitulo.Location = new System.Drawing.Point((formWidth - tituloWidth - filtroWidth - padding) / 2, 20);
+            // Alinhar filtro à direita, na mesma linha do título
+            if (lblFiltroSubscricao != null)
+                lblFiltroSubscricao.Location = new System.Drawing.Point(formWidth - filtroWidth - padding, 34);
+            if (comboFiltroSubscricao != null)
+                comboFiltroSubscricao.Location = new System.Drawing.Point(formWidth - 180 - padding, 30);
+            // Filtro de sexo (logo abaixo do filtro de subscrição)
+            int filtroSexoY = 30 + comboFiltroSubscricao.Height + 8;
+            if (lblFiltroSexo != null)
+                lblFiltroSexo.Location = new System.Drawing.Point(formWidth - 180 - padding - lblFiltroSexo.Width - 10, filtroSexoY + 4);
+            if (comboFiltroSexo != null)
+                comboFiltroSexo.Location = new System.Drawing.Point(formWidth - 180 - padding, filtroSexoY);
+            // Botões
+            if (btnAdicionarCliente != null)
+                btnAdicionarCliente.Location = new System.Drawing.Point(20, buttonY);
+            if (btnEditarCliente != null)
+                btnEditarCliente.Location = new System.Drawing.Point(20 + buttonWidth + buttonSpacing, buttonY);
+            if (btnRemoverCliente != null)
+                btnRemoverCliente.Location = new System.Drawing.Point(20 + 2 * (buttonWidth + buttonSpacing), buttonY);
+            if (btnAdicionarCliente != null)
+                btnAdicionarCliente.Size = new System.Drawing.Size(buttonWidth, buttonHeight);
+            if (btnEditarCliente != null)
+                btnEditarCliente.Size = new System.Drawing.Size(buttonWidth, buttonHeight);
+            if (btnRemoverCliente != null)
+                btnRemoverCliente.Size = new System.Drawing.Size(buttonWidth, buttonHeight);
+            // DataGridView
+            if (dgvClientes != null)
+            {
+                dgvClientes.Location = new System.Drawing.Point(30, gridTop);
+                dgvClientes.Size = new System.Drawing.Size(this.ClientSize.Width - 60, this.ClientSize.Height - gridTop - 70);
+            }
         }
     }
 }
