@@ -108,7 +108,7 @@
             // btnVerConteudos
             // 
             this.btnVerConteudos.Size = new System.Drawing.Size(buttonWidth, buttonHeight);
-            this.btnVerConteudos.Text = "Ver Lista de Conteúdos";
+            this.btnVerConteudos.Text = "Ver Lista de Filmes";
             this.btnVerConteudos.UseVisualStyleBackColor = true;
             this.btnVerConteudos.Click += new System.EventHandler(this.btnVerConteudos_Click);
 

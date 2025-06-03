@@ -7,10 +7,20 @@ namespace Streaming_BD
     public partial class Form3 : Form
     {
         private string connectionString = "Server=tcp:mednat.ieeta.pt\\SQLSERVER,8101;Database=p1g11;User Id=p1g11;Password=Theoxavi11;TrustServerCertificate=True";
+        private ComboBox comboFiltroSubscricao;
 
         public Form3()
         {
             InitializeComponent();
+            // Adiciona ComboBox de filtro de subscrição
+            comboFiltroSubscricao = new ComboBox();
+            comboFiltroSubscricao.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboFiltroSubscricao.Items.AddRange(new object[] { "Todos", "Premium", "Standart", "Sem Subscrição" });
+            comboFiltroSubscricao.SelectedIndex = 0;
+            comboFiltroSubscricao.Location = new System.Drawing.Point(30, 30);
+            comboFiltroSubscricao.Size = new System.Drawing.Size(180, 28);
+            comboFiltroSubscricao.SelectedIndexChanged += ComboFiltroSubscricao_SelectedIndexChanged;
+            this.Controls.Add(comboFiltroSubscricao);
         }
 
         protected override void OnLoad(System.EventArgs e)
@@ -19,30 +29,30 @@ namespace Streaming_BD
             CarregarClientes();
         }
 
+        private void ComboFiltroSubscricao_SelectedIndexChanged(object? sender, EventArgs e)
+        {
+            CarregarClientes();
+        }
+
         private void CarregarClientes()
         {
             using (var conn = new SqlConnection(connectionString))
             {
                 conn.Open();
-                string query = @"
-                    SELECT c.id_cliente, c.nome, c.email, c.data_nascimento, c.sexo,
-                           ISNULL(s.tipo_sub, 'Sem Subscrição') AS [Tipo Subscrição],
-                           CASE 
-                               WHEN s.data_fim IS NULL THEN 'Inativo'
-                               WHEN s.data_fim >= CAST(GETDATE() AS DATE) THEN 'Ativo'
-                               ELSE 'Inativo'
-                           END AS [Estado]
-                    FROM Streaming_Cliente c
-                    LEFT JOIN (
-                        SELECT *, ROW_NUMBER() OVER (PARTITION BY id_cliente ORDER BY data_fim DESC) AS rn
-                        FROM Streaming_Subscricao
-                    ) s ON c.id_cliente = s.id_cliente AND s.rn = 1
-                ";
-                using (var adapter = new SqlDataAdapter(query, conn))
+                string filtro = comboFiltroSubscricao?.SelectedItem?.ToString() ?? "Todos";
+                using (var cmd = new SqlCommand("SP_FiltrarClientesPorSubscricao", conn))
                 {
-                    DataTable dt = new DataTable();
-                    adapter.Fill(dt);
-                    dgvClientes.DataSource = dt;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    if (filtro == "Todos")
+                        cmd.Parameters.AddWithValue("@tipo_sub", DBNull.Value);
+                    else
+                        cmd.Parameters.AddWithValue("@tipo_sub", filtro);
+                    using (var adapter = new SqlDataAdapter(cmd))
+                    {
+                        DataTable dt = new DataTable();
+                        adapter.Fill(dt);
+                        dgvClientes.DataSource = dt;
+                    }
                 }
             }
         }
