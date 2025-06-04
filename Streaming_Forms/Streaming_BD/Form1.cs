@@ -64,5 +64,11 @@ namespace Streaming_BD
         {
 
         }
+
+        private void btnFazerRating_Click(object sender, EventArgs e)
+        {
+            var formRating = new FormFazerRating();
+            formRating.ShowDialog();
+        }
     }
 }

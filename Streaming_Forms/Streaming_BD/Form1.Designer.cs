@@ -36,6 +36,7 @@
             btnVerConteudos = new Button();
             lblOpcoes = new Label();
             btnEditarSeries = new Button();
+            btnFazerRating = new Button();
 
             // 
             // button1
@@ -79,6 +80,7 @@
             this.btnAdicionarConteudo.Location = new System.Drawing.Point(startX2, y1);
             this.btnVerConteudos.Location = new System.Drawing.Point(startX2, y1 + buttonHeight + spacingY);
             this.btnEditarSeries.Location = new System.Drawing.Point(startX1, y1 + 2 * (buttonHeight + spacingY));
+            this.btnFazerRating.Location = new System.Drawing.Point(startX2, y1 + 2 * (buttonHeight + spacingY));
 
             // 
             // btnAdicionarCliente
@@ -120,6 +122,14 @@
             this.btnEditarSeries.UseVisualStyleBackColor = true;
             this.btnEditarSeries.Click += new System.EventHandler(this.btnEditarSeries_Click);
 
+            // 
+            // btnFazerRating
+            // 
+            this.btnFazerRating.Size = new System.Drawing.Size(buttonWidth, buttonHeight);
+            this.btnFazerRating.Text = "Fazer Rating";
+            this.btnFazerRating.UseVisualStyleBackColor = true;
+            this.btnFazerRating.Click += new System.EventHandler(this.btnFazerRating_Click);
+
             // Controls
             Controls.Clear();
             Controls.Add(label5);
@@ -129,6 +139,7 @@
             Controls.Add(btnAdicionarConteudo);
             Controls.Add(btnVerConteudos);
             Controls.Add(btnEditarSeries);
+            Controls.Add(btnFazerRating);
 
             // 
             // Form1
@@ -152,5 +163,6 @@
         private Button btnVerConteudos;
         private Label lblOpcoes;
         private Button btnEditarSeries;
+        private Button btnFazerRating;
     }
 }
