@@ -30,7 +30,7 @@ BEGIN
         RETURN
     END
     -- Se não existe, insere normalmente
-    INSERT INTO Streaming_Rating (id_cliente, id_conteudo, estrelas)
-    SELECT id_cliente, id_conteudo, estrelas FROM inserted
+    INSERT INTO Streaming_Rating (id_cliente, id_conteudo, estrelas, data)
+    SELECT id_cliente, id_conteudo, estrelas, GETDATE() FROM inserted
 END
 GO
