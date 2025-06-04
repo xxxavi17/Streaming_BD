@@ -9,6 +9,7 @@ namespace Streaming_BD
     public partial class FormEditarSerieCompleta : Form
     {
         private int idConteudo;
+        private string tituloSerie = "";
         private string connectionString = "Server=tcp:mednat.ieeta.pt\\SQLSERVER,8101;Database=p1g11;User Id=p1g11;Password=Theoxavi11;TrustServerCertificate=True";
 
         public FormEditarSerieCompleta(int idConteudo)
@@ -20,6 +21,21 @@ namespace Streaming_BD
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
+
+            // Buscar o título da série
+            using (var conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                using (var cmd = new SqlCommand("SELECT titulo FROM Streaming_Conteudo WHERE id_conteudo = @id", conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", idConteudo);
+                    var result = cmd.ExecuteScalar();
+                    if (result != null)
+                        tituloSerie = result.ToString()!;
+                }
+            }
+
+            lblTitulo.Text = $"Editar Série: {tituloSerie}";
             CarregarTemporadas();
         }
 
@@ -100,7 +116,7 @@ namespace Streaming_BD
                 var form = new FormAdicionarEpisodio(idTemporada);
                 var result = form.ShowDialog();
                 if (result == DialogResult.OK)
-                    CarregarTemporadas(); // Atualiza o painel após adicionar episódio
+                    CarregarTemporadas(); // Atualiza após adicionar episódio
             };
             panel.Controls.Add(btnAdicionarEpisodio);
 
@@ -114,7 +130,7 @@ namespace Streaming_BD
             {
                 var form = new FormVerEpisodios(idTemporada);
                 form.ShowDialog();
-                CarregarTemporadas(); // Atualiza após edição/remoção de episódio
+                CarregarTemporadas(); // Atualiza após edição/remoção
             };
 
             panel.Controls.Add(btnVerEpisodios);

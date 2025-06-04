@@ -56,7 +56,6 @@ namespace Streaming_BD
 
                 MessageBox.Show("Temporada adicionada com sucesso!");
 
-                // Atualização opcional: abrir FormAdicionarEpisodio já com o idTemporada
                 DialogResult resposta = MessageBox.Show("Deseja adicionar episódios agora?", "Continuar?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (resposta == DialogResult.Yes)
                 {
@@ -64,18 +63,12 @@ namespace Streaming_BD
                     formEpisodio.ShowDialog();
                 }
 
-                // Pode-se limpar campos ou fechar o formulário
                 this.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Erro ao adicionar temporada: " + ex.Message);
             }
-        }
-
-        private void btnAdicionarEpisodio_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Adicione a temporada primeiro para criar episódios.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
     }
 }

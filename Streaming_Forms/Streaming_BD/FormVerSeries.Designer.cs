@@ -85,7 +85,7 @@ namespace Streaming_BD
             this.btnEditarTemporada.Name = "btnEditarTemporada";
             this.btnEditarTemporada.Size = new System.Drawing.Size(180, 40);
             this.btnEditarTemporada.TabIndex = 4;
-            this.btnEditarTemporada.Text = "Editar Temporada";
+            this.btnEditarTemporada.Text = "Editar Série";
             this.btnEditarTemporada.UseVisualStyleBackColor = true;
             this.btnEditarTemporada.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
             this.btnEditarTemporada.Click += new System.EventHandler(this.btnEditarTemporada_Click);
@@ -97,7 +97,7 @@ namespace Streaming_BD
             this.btnRemoverTemporada.Name = "btnRemoverTemporada";
             this.btnRemoverTemporada.Size = new System.Drawing.Size(180, 40);
             this.btnRemoverTemporada.TabIndex = 5;
-            this.btnRemoverTemporada.Text = "Remover Temporada";
+            this.btnRemoverTemporada.Text = "Remover Série";
             this.btnRemoverTemporada.UseVisualStyleBackColor = true;
             this.btnRemoverTemporada.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
             this.btnRemoverTemporada.Click += new System.EventHandler(this.btnRemoverTemporada_Click);

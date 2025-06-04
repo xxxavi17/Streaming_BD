@@ -8,6 +8,9 @@ namespace Streaming_BD
     public partial class FormVerEpisodios : Form
     {
         private int idTemporada;
+        private int numeroTemporada;
+        private string nomeSerie = "";
+
         private string connectionString = "Server=tcp:mednat.ieeta.pt\\SQLSERVER,8101;Database=p1g11;User Id=p1g11;Password=Theoxavi11;TrustServerCertificate=True";
 
         public FormVerEpisodios(int idTemporada)
@@ -19,6 +22,33 @@ namespace Streaming_BD
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
+
+            // Buscar número da temporada e título da série
+            using (var conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                using (var cmd = new SqlCommand(@"
+                    SELECT t.numero_temporada, c.titulo
+                    FROM Streaming_Temporada t
+                    INNER JOIN Streaming_Serie s ON t.id_serie = s.id_conteudo
+                    INNER JOIN Streaming_Conteudo c ON s.id_conteudo = c.id_conteudo
+                    WHERE t.id_temporada = @id", conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", idTemporada);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            numeroTemporada = reader.GetInt32(0);
+                            nomeSerie = reader.GetString(1);
+                        }
+                    }
+                }
+            }
+
+            lblTitulo.Text = $"Episódios da Temporada {numeroTemporada} – {nomeSerie}";
+            lblTitulo.Left = (this.ClientSize.Width - lblTitulo.Width) / 2;
             CarregarEpisodios();
         }
 

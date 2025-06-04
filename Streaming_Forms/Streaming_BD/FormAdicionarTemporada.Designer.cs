@@ -19,7 +19,6 @@ namespace Streaming_BD
         private System.Windows.Forms.Label lblAnoTemporada;
         private System.Windows.Forms.TextBox txtAnoTemporada;
         private System.Windows.Forms.Button btnAdicionarTemporada;
-        private System.Windows.Forms.Button btnAdicionarEpisodio;
         private System.Windows.Forms.Button btnMenuInicial;
 
         private void InitializeComponent()
@@ -30,7 +29,6 @@ namespace Streaming_BD
             this.lblAnoTemporada = new System.Windows.Forms.Label();
             this.txtAnoTemporada = new System.Windows.Forms.TextBox();
             this.btnAdicionarTemporada = new System.Windows.Forms.Button();
-            this.btnAdicionarEpisodio = new System.Windows.Forms.Button();
             this.btnMenuInicial = new System.Windows.Forms.Button();
 
             // 
@@ -76,14 +74,6 @@ namespace Streaming_BD
             this.btnAdicionarTemporada.Click += new EventHandler(this.btnAdicionarTemporada_Click);
 
             // 
-            // Botão: Adicionar Episódio
-            // 
-            this.btnAdicionarEpisodio.Text = "Adicionar Episódio";
-            this.btnAdicionarEpisodio.Size = new Size(180, 40);
-            this.btnAdicionarEpisodio.Location = new Point(250, 190);
-            this.btnAdicionarEpisodio.Click += new EventHandler(this.btnAdicionarEpisodio_Click);
-
-            // 
             // Botão: Menu Inicial
             // 
             this.btnMenuInicial.Text = "Menu Inicial";
@@ -100,7 +90,6 @@ namespace Streaming_BD
             this.Controls.Add(this.lblAnoTemporada);
             this.Controls.Add(this.txtAnoTemporada);
             this.Controls.Add(this.btnAdicionarTemporada);
-            this.Controls.Add(this.btnAdicionarEpisodio);
             this.Controls.Add(this.btnMenuInicial);
 
             this.ResumeLayout(false);

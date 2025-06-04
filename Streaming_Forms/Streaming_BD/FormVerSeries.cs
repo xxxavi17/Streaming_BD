@@ -69,7 +69,7 @@ namespace Streaming_BD
         {
             if (dgvSeries.SelectedRows.Count == 0)
             {
-                MessageBox.Show("Selecione uma temporada para editar.");
+                MessageBox.Show("Selecione uma série para editar.");
                 return;
             }
 
@@ -90,12 +90,12 @@ namespace Streaming_BD
         {
             if (dgvSeries.SelectedRows.Count == 0)
             {
-                MessageBox.Show("Selecione uma temporada para remover.");
+                MessageBox.Show("Selecione uma série para remover.");
                 return;
             }
 
             var result = MessageBox.Show(
-                "Tem a certeza que deseja remover a temporada selecionada?",
+                "Tem a certeza que deseja remover a série selecionada (com todas as temporadas e episódios)?",
                 "Confirmação",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question
@@ -106,25 +106,25 @@ namespace Streaming_BD
 
             try
             {
-                int idTemporada = Convert.ToInt32(dgvSeries.SelectedRows[0].Cells["id_temporada"].Value);
+                int idSerie = Convert.ToInt32(dgvSeries.SelectedRows[0].Cells["id_serie"].Value);
 
                 using (var conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    using (var cmd = new SqlCommand("SP_RemoverTemporada", conn))
+                    using (var cmd = new SqlCommand("SP_RemoverSerie", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@id_temporada", idTemporada);
+                        cmd.Parameters.AddWithValue("@id_serie", idSerie);
                         cmd.ExecuteNonQuery();
                     }
                 }
 
-                MessageBox.Show("Temporada removida com sucesso.");
+                MessageBox.Show("Série removida com sucesso.");
                 CarregarSeriesTemporadas();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao remover temporada: " + ex.Message);
+                MessageBox.Show("Erro ao remover série: " + ex.Message);
             }
         }
     }
