@@ -3,119 +3,142 @@ namespace Streaming_BD
     partial class FormAdicionarSerie
     {
         private System.ComponentModel.IContainer components = null;
+
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
-            {
                 components.Dispose();
-            }
             base.Dispose(disposing);
         }
-        private System.Windows.Forms.TextBox txtTitulo;
-        private System.Windows.Forms.TextBox txtGenero;
-        private System.Windows.Forms.TextBox txtAno;
-        private System.Windows.Forms.TextBox txtIdadeMinima;
-        private System.Windows.Forms.TextBox txtAverageRating;
-        private System.Windows.Forms.TextBox txtIdProdutora;
-        private System.Windows.Forms.TextBox txtNumeroTemporadas;
-        private System.Windows.Forms.TextBox txtNumeroTemporada;
-        private System.Windows.Forms.TextBox txtAnoTemporada;
-        private System.Windows.Forms.TextBox txtTituloEpisodio;
-        private System.Windows.Forms.TextBox txtNumeroEpisodio;
-        private System.Windows.Forms.TextBox txtDuracaoEpisodio;
+
+        private System.Windows.Forms.Label lblTituloForm;
         private System.Windows.Forms.Label lblTitulo;
+        private System.Windows.Forms.TextBox txtTitulo;
         private System.Windows.Forms.Label lblGenero;
+        private System.Windows.Forms.TextBox txtGenero;
         private System.Windows.Forms.Label lblAno;
+        private System.Windows.Forms.TextBox txtAno;
         private System.Windows.Forms.Label lblIdadeMinima;
-        private System.Windows.Forms.Label lblAverageRating;
-        private System.Windows.Forms.Label lblIdProdutora;
-        private System.Windows.Forms.Label lblNumeroTemporadas;
-        private System.Windows.Forms.Label lblNumeroTemporada;
-        private System.Windows.Forms.Label lblAnoTemporada;
-        private System.Windows.Forms.Label lblTituloEpisodio;
-        private System.Windows.Forms.Label lblNumeroEpisodio;
-        private System.Windows.Forms.Label lblDuracaoEpisodio;
+        private System.Windows.Forms.TextBox txtIdadeMinima;
+        private System.Windows.Forms.Label lblProdutora;
+        private System.Windows.Forms.ComboBox cmbProdutora;
+        private System.Windows.Forms.TextBox txtProdutora;
         private System.Windows.Forms.Button btnAdicionarSerie;
         private System.Windows.Forms.Button btnMenuInicial;
+        private System.Windows.Forms.Button btnVoltar;
+
         private void InitializeComponent()
         {
-            this.txtTitulo = new System.Windows.Forms.TextBox();
-            this.txtGenero = new System.Windows.Forms.TextBox();
-            this.txtAno = new System.Windows.Forms.TextBox();
-            this.txtIdadeMinima = new System.Windows.Forms.TextBox();
-            this.txtAverageRating = new System.Windows.Forms.TextBox();
-            this.txtIdProdutora = new System.Windows.Forms.TextBox();
-            this.txtNumeroTemporadas = new System.Windows.Forms.TextBox();
-            this.txtNumeroTemporada = new System.Windows.Forms.TextBox();
-            this.txtAnoTemporada = new System.Windows.Forms.TextBox();
-            this.txtTituloEpisodio = new System.Windows.Forms.TextBox();
-            this.txtNumeroEpisodio = new System.Windows.Forms.TextBox();
-            this.txtDuracaoEpisodio = new System.Windows.Forms.TextBox();
+            this.lblTituloForm = new System.Windows.Forms.Label();
             this.lblTitulo = new System.Windows.Forms.Label();
+            this.txtTitulo = new System.Windows.Forms.TextBox();
             this.lblGenero = new System.Windows.Forms.Label();
+            this.txtGenero = new System.Windows.Forms.TextBox();
             this.lblAno = new System.Windows.Forms.Label();
+            this.txtAno = new System.Windows.Forms.TextBox();
             this.lblIdadeMinima = new System.Windows.Forms.Label();
-            this.lblAverageRating = new System.Windows.Forms.Label();
-            this.lblIdProdutora = new System.Windows.Forms.Label();
-            this.lblNumeroTemporadas = new System.Windows.Forms.Label();
-            this.lblNumeroTemporada = new System.Windows.Forms.Label();
-            this.lblAnoTemporada = new System.Windows.Forms.Label();
-            this.lblTituloEpisodio = new System.Windows.Forms.Label();
-            this.lblNumeroEpisodio = new System.Windows.Forms.Label();
-            this.lblDuracaoEpisodio = new System.Windows.Forms.Label();
+            this.txtIdadeMinima = new System.Windows.Forms.TextBox();
+            this.lblProdutora = new System.Windows.Forms.Label();
+            this.cmbProdutora = new System.Windows.Forms.ComboBox();
+            this.txtProdutora = new System.Windows.Forms.TextBox();
             this.btnAdicionarSerie = new System.Windows.Forms.Button();
             this.btnMenuInicial = new System.Windows.Forms.Button();
-            this.SuspendLayout();
-            // Labels
+            this.btnVoltar = new System.Windows.Forms.Button();
+
+            // 
+            // FormAdicionarSerie
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(520, 480);
+            this.Name = "FormAdicionarSerie";
+            this.Text = "Adicionar Série";
+
+            // 
+            // lblTituloForm
+            // 
+            this.lblTituloForm.Text = "Adicionar Série";
+            this.lblTituloForm.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblTituloForm.Location = new System.Drawing.Point(0, 20);
+            this.lblTituloForm.Size = new System.Drawing.Size(500, 40);
+            this.lblTituloForm.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+
+            // 
+            // lblTitulo
+            // 
             this.lblTitulo.Text = "Título:";
-            this.lblTitulo.Location = new System.Drawing.Point(30, 30);
+            this.lblTitulo.Location = new System.Drawing.Point(40, 80);
+            this.txtTitulo.Location = new System.Drawing.Point(180, 80);
+            this.txtTitulo.Size = new System.Drawing.Size(250, 27);
+
+            // 
+            // lblGenero
+            // 
             this.lblGenero.Text = "Gênero:";
-            this.lblGenero.Location = new System.Drawing.Point(30, 70);
+            this.lblGenero.Location = new System.Drawing.Point(40, 120);
+            this.txtGenero.Location = new System.Drawing.Point(180, 120);
+            this.txtGenero.Size = new System.Drawing.Size(250, 27);
+
+            // 
+            // lblAno
+            // 
             this.lblAno.Text = "Ano:";
-            this.lblAno.Location = new System.Drawing.Point(30, 110);
+            this.lblAno.Location = new System.Drawing.Point(40, 160);
+            this.txtAno.Location = new System.Drawing.Point(180, 160);
+            this.txtAno.Size = new System.Drawing.Size(100, 27);
+
+            // 
+            // lblIdadeMinima
+            // 
             this.lblIdadeMinima.Text = "Idade Mínima:";
-            this.lblIdadeMinima.Location = new System.Drawing.Point(30, 150);
-            this.lblAverageRating.Text = "Average Rating:";
-            this.lblAverageRating.Location = new System.Drawing.Point(30, 190);
-            this.lblIdProdutora.Text = "ID Produtora:";
-            this.lblIdProdutora.Location = new System.Drawing.Point(30, 230);
-            this.lblNumeroTemporadas.Text = "Nº Temporadas:";
-            this.lblNumeroTemporadas.Location = new System.Drawing.Point(30, 270);
-            this.lblNumeroTemporada.Text = "Nº Temporada:";
-            this.lblNumeroTemporada.Location = new System.Drawing.Point(30, 310);
-            this.lblAnoTemporada.Text = "Ano Temporada:";
-            this.lblAnoTemporada.Location = new System.Drawing.Point(30, 350);
-            this.lblTituloEpisodio.Text = "Título Episódio:";
-            this.lblTituloEpisodio.Location = new System.Drawing.Point(30, 390);
-            this.lblNumeroEpisodio.Text = "Nº Episódio:";
-            this.lblNumeroEpisodio.Location = new System.Drawing.Point(30, 430);
-            this.lblDuracaoEpisodio.Text = "Duração Episódio (min):";
-            this.lblDuracaoEpisodio.Location = new System.Drawing.Point(30, 470);
-            // TextBoxes
-            this.txtTitulo.Location = new System.Drawing.Point(200, 30);
-            this.txtGenero.Location = new System.Drawing.Point(200, 70);
-            this.txtAno.Location = new System.Drawing.Point(200, 110);
-            this.txtIdadeMinima.Location = new System.Drawing.Point(200, 150);
-            this.txtAverageRating.Location = new System.Drawing.Point(200, 190);
-            this.txtIdProdutora.Location = new System.Drawing.Point(200, 230);
-            this.txtNumeroTemporadas.Location = new System.Drawing.Point(200, 270);
-            this.txtNumeroTemporada.Location = new System.Drawing.Point(200, 310);
-            this.txtAnoTemporada.Location = new System.Drawing.Point(200, 350);
-            this.txtTituloEpisodio.Location = new System.Drawing.Point(200, 390);
-            this.txtNumeroEpisodio.Location = new System.Drawing.Point(200, 430);
-            this.txtDuracaoEpisodio.Location = new System.Drawing.Point(200, 470);
-            // Botões
+            this.lblIdadeMinima.Location = new System.Drawing.Point(40, 200);
+            this.txtIdadeMinima.Location = new System.Drawing.Point(180, 200);
+            this.txtIdadeMinima.Size = new System.Drawing.Size(100, 27);
+
+            // 
+            // lblProdutora
+            // 
+            this.lblProdutora.Text = "Produtora:";
+            this.lblProdutora.Location = new System.Drawing.Point(40, 240);
+            this.cmbProdutora.Location = new System.Drawing.Point(180, 240);
+            this.cmbProdutora.Size = new System.Drawing.Size(250, 28);
+            this.cmbProdutora.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+
+            // 
+            // txtProdutora
+            // 
+            this.txtProdutora.PlaceholderText = "Ou digite o nome da produtora";
+            this.txtProdutora.Location = new System.Drawing.Point(180, 280);
+            this.txtProdutora.Size = new System.Drawing.Size(250, 27);
+
+            // 
+            // btnAdicionarSerie
+            // 
             this.btnAdicionarSerie.Text = "Adicionar Série";
-            this.btnAdicionarSerie.Location = new System.Drawing.Point(200, 520);
-            this.btnAdicionarSerie.Size = new System.Drawing.Size(180, 40);
-            this.btnMenuInicial.Location = new System.Drawing.Point(20, 20);
-            this.btnMenuInicial.Name = "btnMenuInicial";
-            this.btnMenuInicial.Size = new System.Drawing.Size(120, 35);
-            this.btnMenuInicial.TabIndex = 99;
+            this.btnAdicionarSerie.Location = new System.Drawing.Point(180, 340);
+            this.btnAdicionarSerie.Size = new System.Drawing.Size(160, 40);
+            this.btnAdicionarSerie.Click += new System.EventHandler(this.btnAdicionarSerie_Click);
+
+            // 
+            // btnVoltar
+            // 
+            this.btnVoltar.Text = "Voltar Atrás";
+            this.btnVoltar.Location = new System.Drawing.Point(30, 400);
+            this.btnVoltar.Size = new System.Drawing.Size(120, 35);
+            this.btnVoltar.Click += new System.EventHandler(this.btnVoltar_Click);
+
+            // 
+            // btnMenuInicial
+            // 
             this.btnMenuInicial.Text = "Menu Inicial";
-            this.btnMenuInicial.UseVisualStyleBackColor = true;
+            this.btnMenuInicial.Location = new System.Drawing.Point(20, 20);
+            this.btnMenuInicial.Size = new System.Drawing.Size(120, 35);
             this.btnMenuInicial.Click += new System.EventHandler(this.btnMenuInicial_Click);
-            // Adiciona controles ao formulário
+
+            // 
+            // Add controls
+            // 
+            this.Controls.Add(this.lblTituloForm);
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.txtTitulo);
             this.Controls.Add(this.lblGenero);
@@ -124,30 +147,13 @@ namespace Streaming_BD
             this.Controls.Add(this.txtAno);
             this.Controls.Add(this.lblIdadeMinima);
             this.Controls.Add(this.txtIdadeMinima);
-            this.Controls.Add(this.lblAverageRating);
-            this.Controls.Add(this.txtAverageRating);
-            this.Controls.Add(this.lblIdProdutora);
-            this.Controls.Add(this.txtIdProdutora);
-            this.Controls.Add(this.lblNumeroTemporadas);
-            this.Controls.Add(this.txtNumeroTemporadas);
-            this.Controls.Add(this.lblNumeroTemporada);
-            this.Controls.Add(this.txtNumeroTemporada);
-            this.Controls.Add(this.lblAnoTemporada);
-            this.Controls.Add(this.txtAnoTemporada);
-            this.Controls.Add(this.lblTituloEpisodio);
-            this.Controls.Add(this.txtTituloEpisodio);
-            this.Controls.Add(this.lblNumeroEpisodio);
-            this.Controls.Add(this.txtNumeroEpisodio);
-            this.Controls.Add(this.lblDuracaoEpisodio);
-            this.Controls.Add(this.txtDuracaoEpisodio);
+            this.Controls.Add(this.lblProdutora);
+            this.Controls.Add(this.cmbProdutora);
+            this.Controls.Add(this.txtProdutora);
             this.Controls.Add(this.btnAdicionarSerie);
+            this.Controls.Add(this.btnVoltar);
             this.Controls.Add(this.btnMenuInicial);
-            // Form
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(500, 600);
-            this.Name = "FormAdicionarSerie";
-            this.Text = "Adicionar Série";
+
             this.ResumeLayout(false);
             this.PerformLayout();
         }
