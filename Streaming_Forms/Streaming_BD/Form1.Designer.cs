@@ -2,30 +2,17 @@
 {
     partial class Form1
     {
-        /// <summary>
-        ///  Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        ///  Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
-            {
                 components.Dispose();
-            }
             base.Dispose(disposing);
         }
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        ///  Required method for Designer support - do not modify
-        ///  the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             button1 = new Button();
@@ -35,11 +22,11 @@
             btnAdicionarConteudo = new Button();
             btnVerConteudos = new Button();
             lblOpcoes = new Label();
-            btnEditarSeries = new Button();
+            btnVerSeries = new Button(); // novo botão
             btnFazerRating = new Button();
 
             // 
-            // button1
+            // button1 (não utilizado no momento)
             // 
             button1.Location = new Point(364, 358);
             button1.Name = "button1";
@@ -47,8 +34,9 @@
             button1.TabIndex = 0;
             button1.Text = "Registar";
             button1.UseVisualStyleBackColor = true;
+
             // 
-            // label5
+            // label5 (título)
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -58,7 +46,9 @@
             label5.TabIndex = 12;
             label5.Text = "Menu Inicial Streaming BD";
 
-            // lblOpcoes (Opções)
+            // 
+            // lblOpcoes
+            // 
             lblOpcoes.AutoSize = true;
             lblOpcoes.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             lblOpcoes.Location = new Point(50, 100);
@@ -67,7 +57,7 @@
             lblOpcoes.TabIndex = 0;
             lblOpcoes.Text = "Opções:";
 
-            // Posição dos botões em duas colunas
+            // Posições
             int buttonWidth = 180;
             int buttonHeight = 40;
             int spacingY = 20;
@@ -75,62 +65,70 @@
             int startX2 = startX1 + buttonWidth + 60;
             int y1 = lblOpcoes.Location.Y + lblOpcoes.Height + 40;
 
-            this.btnAdicionarCliente.Location = new System.Drawing.Point(startX1, y1);
-            this.btnVerClientes.Location = new System.Drawing.Point(startX1, y1 + buttonHeight + spacingY);
-            this.btnAdicionarConteudo.Location = new System.Drawing.Point(startX2, y1);
-            this.btnVerConteudos.Location = new System.Drawing.Point(startX2, y1 + buttonHeight + spacingY);
-            this.btnEditarSeries.Location = new System.Drawing.Point(startX1, y1 + 2 * (buttonHeight + spacingY));
-            this.btnFazerRating.Location = new System.Drawing.Point(startX2, y1 + 2 * (buttonHeight + spacingY));
-
             // 
             // btnAdicionarCliente
             // 
-            this.btnAdicionarCliente.Size = new System.Drawing.Size(buttonWidth, buttonHeight);
-            this.btnAdicionarCliente.Text = "Adicionar Cliente";
-            this.btnAdicionarCliente.UseVisualStyleBackColor = true;
-            this.btnAdicionarCliente.Click += new System.EventHandler(this.btnAdicionarCliente_Click);
+            btnAdicionarCliente.Location = new Point(startX1, y1);
+            btnAdicionarCliente.Size = new Size(buttonWidth, buttonHeight);
+            btnAdicionarCliente.Text = "Adicionar Cliente";
+            btnAdicionarCliente.UseVisualStyleBackColor = true;
+            btnAdicionarCliente.Click += new System.EventHandler(this.btnAdicionarCliente_Click);
 
             // 
             // btnVerClientes
             // 
-            this.btnVerClientes.Size = new System.Drawing.Size(buttonWidth, buttonHeight);
-            this.btnVerClientes.Text = "Ver Lista de Clientes";
-            this.btnVerClientes.UseVisualStyleBackColor = true;
-            this.btnVerClientes.Click += new System.EventHandler(this.btnVerClientes_Click);
+            btnVerClientes.Location = new Point(startX1, y1 + buttonHeight + spacingY);
+            btnVerClientes.Size = new Size(buttonWidth, buttonHeight);
+            btnVerClientes.Text = "Ver Lista de Clientes";
+            btnVerClientes.UseVisualStyleBackColor = true;
+            btnVerClientes.Click += new System.EventHandler(this.btnVerClientes_Click);
 
             // 
             // btnAdicionarConteudo
             // 
-            this.btnAdicionarConteudo.Size = new System.Drawing.Size(buttonWidth, buttonHeight);
-            this.btnAdicionarConteudo.Text = "Adicionar Conteúdo";
-            this.btnAdicionarConteudo.UseVisualStyleBackColor = true;
-            this.btnAdicionarConteudo.Click += new System.EventHandler(this.btnAdicionarConteudo_Click);
+            btnAdicionarConteudo.Location = new Point(startX2, y1);
+            btnAdicionarConteudo.Size = new Size(buttonWidth, buttonHeight);
+            btnAdicionarConteudo.Text = "Adicionar Conteúdo";
+            btnAdicionarConteudo.UseVisualStyleBackColor = true;
+            btnAdicionarConteudo.Click += new System.EventHandler(this.btnAdicionarConteudo_Click);
 
             // 
             // btnVerConteudos
             // 
-            this.btnVerConteudos.Size = new System.Drawing.Size(buttonWidth, buttonHeight);
-            this.btnVerConteudos.Text = "Ver Lista de Filmes";
-            this.btnVerConteudos.UseVisualStyleBackColor = true;
-            this.btnVerConteudos.Click += new System.EventHandler(this.btnVerConteudos_Click);
+            btnVerConteudos.Location = new Point(startX2, y1 + buttonHeight + spacingY);
+            btnVerConteudos.Size = new Size(buttonWidth, buttonHeight);
+            btnVerConteudos.Text = "Ver Lista de Filmes";
+            btnVerConteudos.UseVisualStyleBackColor = true;
+            btnVerConteudos.Click += new System.EventHandler(this.btnVerConteudos_Click);
 
             // 
-            // btnEditarSeries
+            // btnVerSeries
             // 
-            this.btnEditarSeries.Size = new System.Drawing.Size(buttonWidth, buttonHeight);
-            this.btnEditarSeries.Text = "Editar Séries";
-            this.btnEditarSeries.UseVisualStyleBackColor = true;
-            this.btnEditarSeries.Click += new System.EventHandler(this.btnEditarSeries_Click);
+            btnVerSeries.Location = new Point(startX1, y1 + 2 * (buttonHeight + spacingY));
+            btnVerSeries.Size = new Size(buttonWidth, buttonHeight);
+            btnVerSeries.Text = "Ver Lista de Séries";
+            btnVerSeries.UseVisualStyleBackColor = true;
+            btnVerSeries.Click += new System.EventHandler(this.btnVerSeries_Click);
 
             // 
             // btnFazerRating
             // 
-            this.btnFazerRating.Size = new System.Drawing.Size(buttonWidth, buttonHeight);
-            this.btnFazerRating.Text = "Fazer Rating";
-            this.btnFazerRating.UseVisualStyleBackColor = true;
-            this.btnFazerRating.Click += new System.EventHandler(this.btnFazerRating_Click);
+            btnFazerRating.Location = new Point(startX2, y1 + 2 * (buttonHeight + spacingY));
+            btnFazerRating.Size = new Size(buttonWidth, buttonHeight);
+            btnFazerRating.Text = "Fazer Rating";
+            btnFazerRating.UseVisualStyleBackColor = true;
+            btnFazerRating.Click += new System.EventHandler(this.btnFazerRating_Click);
 
-            // Controls
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new SizeF(8F, 20F);
+            this.AutoScaleMode = AutoScaleMode.Font;
+            this.ClientSize = new Size(800, 450);
+            this.Name = "Form1";
+            this.Text = "Menu Inicial Streaming BD";
+
+            // Controles
             Controls.Clear();
             Controls.Add(label5);
             Controls.Add(lblOpcoes);
@@ -138,17 +136,9 @@
             Controls.Add(btnVerClientes);
             Controls.Add(btnAdicionarConteudo);
             Controls.Add(btnVerConteudos);
-            Controls.Add(btnEditarSeries);
+            Controls.Add(btnVerSeries); // novo
             Controls.Add(btnFazerRating);
 
-            // 
-            // Form1
-            // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Name = "Form1";
-            Text = "Menu Inicial Streaming BD";
             ResumeLayout(false);
             PerformLayout();
         }
@@ -162,7 +152,7 @@
         private Button btnAdicionarConteudo;
         private Button btnVerConteudos;
         private Label lblOpcoes;
-        private Button btnEditarSeries;
+        private Button btnVerSeries; // novo
         private Button btnFazerRating;
     }
 }

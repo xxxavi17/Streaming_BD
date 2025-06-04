@@ -1,4 +1,4 @@
-using System.Data.SqlClient;
+using System;
 using System.Windows.Forms;
 
 namespace Streaming_BD
@@ -42,27 +42,24 @@ namespace Streaming_BD
             this.Hide();
         }
 
-        // Botão: Editar Séries
-        private void btnEditarSeries_Click(object sender, EventArgs e)
+        // Botão: Ver Lista de Séries
+        private void btnVerSeries_Click(object sender, EventArgs e)
         {
-            FormEditarSeries formEditarSeries = new FormEditarSeries();
-            formEditarSeries.Show();
+            FormVerSeries formVerSeries = new FormVerSeries();
+            formVerSeries.Show();
             this.Hide();
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void label1_Click(object sender, EventArgs e)
         {
-
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-
         }
 
         private void btnFazerRating_Click(object sender, EventArgs e)

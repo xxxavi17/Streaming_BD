@@ -30,11 +30,15 @@ BEGIN
 
     SET @id_conteudo = SCOPE_IDENTITY();
 
-    -- Inserir série com pelo menos 1 temporada (mínimo obrigatório)
+    -- Inserir série com 1 temporada
     INSERT INTO Streaming_Serie (id_conteudo, numero_temporadas)
     VALUES (@id_conteudo, 1);
 
-    -- Retornar o ID da nova série
+    -- Inserir Temporada 1 automaticamente
+    INSERT INTO Streaming_Temporada (id_serie, numero_temporada, ano)
+    VALUES (@id_conteudo, 1, @ano);
+
+    -- Retornar o ID da série
     SELECT @id_conteudo AS id_serie;
 END
 GO
