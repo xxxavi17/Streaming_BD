@@ -17,12 +17,6 @@ namespace Streaming_BD
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            comboFiltroSexo.SelectedIndex = 0;
-            CarregarAtores();
-        }
-
-        private void comboFiltroSexo_SelectedIndexChanged(object sender, EventArgs e)
-        {
             CarregarAtores();
         }
 
@@ -32,22 +26,23 @@ namespace Streaming_BD
             {
                 using var conn = new SqlConnection(connectionString);
                 conn.Open();
-                using var cmd = new SqlCommand("SP_ObterAtoresFiltrados", conn);
-                cmd.CommandType = CommandType.StoredProcedure;
 
-                string sexo = comboFiltroSexo.SelectedItem?.ToString() ?? "Todos";
-                if (sexo == "Todos")
-                    cmd.Parameters.AddWithValue("@sexo", DBNull.Value);
-                else
-                    cmd.Parameters.AddWithValue("@sexo", sexo);
+                var query = @"
+                    SELECT 
+                        a.id_ator, a.nome, a.sexo, a.idade,
+                        STUFF((
+                            SELECT ', ' + c.titulo
+                            FROM Streaming_Conteudo c
+                            JOIN Streaming_Conteudo_Ator ac ON ac.id_conteudo = c.id_conteudo
+                            WHERE ac.id_ator = a.id_ator
+                            FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)'), 1, 2, '') AS conteudos
+                    FROM Streaming_Ator a
+                    ORDER BY a.nome";
 
+                using var cmd = new SqlCommand(query, conn);
                 using var adapter = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
-
-                // Adiciona coluna de conteúdos se não existir
-                if (!dt.Columns.Contains("conteudos"))
-                    dt.Columns.Add("conteudos", typeof(string));
 
                 dgvAtores.DataSource = dt;
                 dgvAtores.Columns["id_ator"].HeaderText = "ID";
@@ -119,15 +114,12 @@ namespace Streaming_BD
             }
         }
 
-
         private void FormVerAtores_Resize(object sender, EventArgs e)
         {
             int largura = this.ClientSize.Width;
             int altura = this.ClientSize.Height;
 
             lblTitulo.Location = new System.Drawing.Point((largura - lblTitulo.Width) / 2, 20);
-            lblFiltroSexo.Location = new System.Drawing.Point(largura - 330, 30);
-            comboFiltroSexo.Location = new System.Drawing.Point(largura - 180, 25);
 
             dgvAtores.Location = new System.Drawing.Point(30, 70);
             dgvAtores.Size = new System.Drawing.Size(largura - 60, altura - 150);

@@ -9,7 +9,7 @@ namespace Streaming_BD
         private System.Windows.Forms.Button btnEditarAtor;
         private System.Windows.Forms.Button btnRemoverAtor;
         private System.Windows.Forms.Label lblTitulo;
-        private System.Windows.Forms.ComboBox comboFiltroSexo;
+        //private System.Windows.Forms.ComboBox comboFiltroSexo;
         private System.Windows.Forms.Label lblFiltroSexo;
 
         protected override void Dispose(bool disposing)
@@ -25,7 +25,7 @@ namespace Streaming_BD
             this.btnEditarAtor = new System.Windows.Forms.Button();
             this.btnRemoverAtor = new System.Windows.Forms.Button();
             this.lblTitulo = new System.Windows.Forms.Label();
-            this.comboFiltroSexo = new System.Windows.Forms.ComboBox();
+            //this.comboFiltroSexo = new System.Windows.Forms.ComboBox();
             this.lblFiltroSexo = new System.Windows.Forms.Label();
 
             // 
@@ -51,23 +51,23 @@ namespace Streaming_BD
             // 
             // lblFiltroSexo
             // 
-            this.lblFiltroSexo = new System.Windows.Forms.Label();
-            this.lblFiltroSexo.Text = "Filtrar por sexo:";
-            this.lblFiltroSexo.AutoSize = true;
-            this.lblFiltroSexo.Location = new System.Drawing.Point(680, 30);
-            this.Controls.Add(this.lblFiltroSexo);
+            //this.lblFiltroSexo = new System.Windows.Forms.Label();
+            //this.lblFiltroSexo.Text = "Filtrar por sexo:";
+            //this.lblFiltroSexo.AutoSize = true;
+            //this.lblFiltroSexo.Location = new System.Drawing.Point(680, 30);
+            //this.Controls.Add(this.lblFiltroSexo);
 
             // 
             // comboFiltroSexo
             // 
-            this.comboFiltroSexo = new System.Windows.Forms.ComboBox();
-            this.comboFiltroSexo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboFiltroSexo.Items.AddRange(new object[] { "Todos", "Masculino", "Feminino", "Outro" });
-            this.comboFiltroSexo.SelectedIndex = 0;
-            this.comboFiltroSexo.Location = new System.Drawing.Point(800, 25);
-            this.comboFiltroSexo.Size = new System.Drawing.Size(150, 28);
-            this.comboFiltroSexo.SelectedIndexChanged += new System.EventHandler(this.comboFiltroSexo_SelectedIndexChanged);
-            this.Controls.Add(this.comboFiltroSexo);
+            //this.comboFiltroSexo = new System.Windows.Forms.ComboBox();
+            //this.comboFiltroSexo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            //this.comboFiltroSexo.Items.AddRange(new object[] { "Todos", "Masculino", "Feminino", "Outro" });
+            //this.comboFiltroSexo.SelectedIndex = 0;
+            //this.comboFiltroSexo.Location = new System.Drawing.Point(800, 25);
+            //this.comboFiltroSexo.Size = new System.Drawing.Size(150, 28);
+            //this.comboFiltroSexo.SelectedIndexChanged += new System.EventHandler(this.comboFiltroSexo_SelectedIndexChanged);
+            //this.Controls.Add(this.comboFiltroSexo);
 
             // 
             // dgvAtores
