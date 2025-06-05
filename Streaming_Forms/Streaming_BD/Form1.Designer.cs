@@ -22,11 +22,13 @@
             btnAdicionarConteudo = new Button();
             btnVerConteudos = new Button();
             lblOpcoes = new Label();
-            btnVerSeries = new Button(); // novo botão
+            btnVerSeries = new Button();
             btnFazerRating = new Button();
+            btnAdicionarAtor = new Button();
+            btnVerAtores = new Button(); // NOVO
 
             // 
-            // button1 (não utilizado no momento)
+            // button1 (não usado)
             // 
             button1.Location = new Point(364, 358);
             button1.Name = "button1";
@@ -39,10 +41,10 @@
             // label5 (título)
             // 
             label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label5.Location = new Point(302, 36);
+            label5.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            label5.Location = new Point(230, 36);
             label5.Name = "label5";
-            label5.Size = new Size(241, 41);
+            label5.Size = new Size(341, 41);
             label5.TabIndex = 12;
             label5.Text = "Menu Inicial Streaming BD";
 
@@ -57,7 +59,7 @@
             lblOpcoes.TabIndex = 0;
             lblOpcoes.Text = "Opções:";
 
-            // Posições
+            // Layout
             int buttonWidth = 180;
             int buttonHeight = 40;
             int spacingY = 20;
@@ -120,15 +122,34 @@
             btnFazerRating.Click += new System.EventHandler(this.btnFazerRating_Click);
 
             // 
+            // btnAdicionarAtor
+            // 
+            btnAdicionarAtor.Location = new Point(startX1, y1 + 3 * (buttonHeight + spacingY));
+            btnAdicionarAtor.Size = new Size(buttonWidth, buttonHeight);
+            btnAdicionarAtor.Text = "Adicionar Ator";
+            btnAdicionarAtor.UseVisualStyleBackColor = true;
+            btnAdicionarAtor.Click += new System.EventHandler(this.btnAdicionarAtor_Click);
+
+            // 
+            // btnVerAtores (NOVO)
+            // 
+            btnVerAtores.Location = new Point(startX2, y1 + 3 * (buttonHeight + spacingY));
+            btnVerAtores.Size = new Size(buttonWidth, buttonHeight);
+            btnVerAtores.Text = "Ver Lista de Atores";
+            btnVerAtores.UseVisualStyleBackColor = true;
+            btnVerAtores.Click += new System.EventHandler(this.btnVerAtores_Click);
+
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new SizeF(8F, 20F);
             this.AutoScaleMode = AutoScaleMode.Font;
-            this.ClientSize = new Size(800, 450);
+            this.ClientSize = new Size(800, 500);
             this.Name = "Form1";
             this.Text = "Menu Inicial Streaming BD";
+            this.StartPosition = FormStartPosition.CenterScreen;
 
-            // Controles
+            // Adiciona os controles
             Controls.Clear();
             Controls.Add(label5);
             Controls.Add(lblOpcoes);
@@ -136,8 +157,10 @@
             Controls.Add(btnVerClientes);
             Controls.Add(btnAdicionarConteudo);
             Controls.Add(btnVerConteudos);
-            Controls.Add(btnVerSeries); // novo
+            Controls.Add(btnVerSeries);
             Controls.Add(btnFazerRating);
+            Controls.Add(btnAdicionarAtor);
+            Controls.Add(btnVerAtores); // novo
 
             ResumeLayout(false);
             PerformLayout();
@@ -152,7 +175,9 @@
         private Button btnAdicionarConteudo;
         private Button btnVerConteudos;
         private Label lblOpcoes;
-        private Button btnVerSeries; // novo
+        private Button btnVerSeries;
         private Button btnFazerRating;
+        private Button btnAdicionarAtor;
+        private Button btnVerAtores; // NOVO
     }
 }

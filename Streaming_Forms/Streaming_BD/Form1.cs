@@ -50,6 +50,28 @@ namespace Streaming_BD
             this.Hide();
         }
 
+        // Botão: Adicionar Ator
+        private void btnAdicionarAtor_Click(object sender, EventArgs e)
+        {
+            var formAtor = new FormAdicionarAtor();
+            formAtor.ShowDialog();
+        }
+
+        // Botão: Ver Lista de Atores
+        private void btnVerAtores_Click(object sender, EventArgs e)
+        {
+            var formVerAtores = new FormVerAtores();
+            formVerAtores.Show();
+            this.Hide();
+        }
+
+        private void btnFazerRating_Click(object sender, EventArgs e)
+        {
+            var formRating = new FormFazerRating();
+            formRating.ShowDialog();
+        }
+
+        // Eventos não utilizados (podem ser removidos ou usados no futuro)
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
         }
@@ -60,12 +82,6 @@ namespace Streaming_BD
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-        }
-
-        private void btnFazerRating_Click(object sender, EventArgs e)
-        {
-            var formRating = new FormFazerRating();
-            formRating.ShowDialog();
         }
     }
 }
