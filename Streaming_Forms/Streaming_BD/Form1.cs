@@ -65,23 +65,30 @@ namespace Streaming_BD
             this.Hide();
         }
 
+        // Botão: Fazer Rating
         private void btnFazerRating_Click(object sender, EventArgs e)
         {
             var formRating = new FormFazerRating();
             formRating.ShowDialog();
         }
 
-        // Eventos não utilizados (podem ser removidos ou usados no futuro)
-        private void textBox3_TextChanged(object sender, EventArgs e)
+        // Botão: Assistir Conteúdo
+        private void btnAssistirConteudo_Click(object sender, EventArgs e)
         {
+            var formAssistir = new FormAssistirConteudo();
+            formAssistir.ShowDialog();
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        // Botão: Ver Visualizações (Clientes que assistiram Conteúdo)
+        private void btnVerVisualizacoes_Click(object sender, EventArgs e)
         {
+            var formVisualizacoes = new FormVisualizarVisualizacoes();
+            formVisualizacoes.ShowDialog();
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-        }
+        // Eventos não utilizados
+        private void textBox3_TextChanged(object sender, EventArgs e) { }
+        private void label1_Click(object sender, EventArgs e) { }
+        private void checkBox1_CheckedChanged(object sender, EventArgs e) { }
     }
 }

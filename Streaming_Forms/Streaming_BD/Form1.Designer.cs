@@ -25,7 +25,9 @@
             btnVerSeries = new Button();
             btnFazerRating = new Button();
             btnAdicionarAtor = new Button();
-            btnVerAtores = new Button(); // NOVO
+            btnVerAtores = new Button();
+            btnAssistirConteudo = new Button();
+            btnVerVisualizacoes = new Button(); // NOVO
 
             // 
             // button1 (não usado)
@@ -131,7 +133,7 @@
             btnAdicionarAtor.Click += new System.EventHandler(this.btnAdicionarAtor_Click);
 
             // 
-            // btnVerAtores (NOVO)
+            // btnVerAtores
             // 
             btnVerAtores.Location = new Point(startX2, y1 + 3 * (buttonHeight + spacingY));
             btnVerAtores.Size = new Size(buttonWidth, buttonHeight);
@@ -140,16 +142,33 @@
             btnVerAtores.Click += new System.EventHandler(this.btnVerAtores_Click);
 
             // 
+            // btnAssistirConteudo
+            // 
+            btnAssistirConteudo.Location = new Point(startX1, y1 + 4 * (buttonHeight + spacingY));
+            btnAssistirConteudo.Size = new Size(buttonWidth, buttonHeight);
+            btnAssistirConteudo.Text = "Assistir Conteúdo";
+            btnAssistirConteudo.UseVisualStyleBackColor = true;
+            btnAssistirConteudo.Click += new System.EventHandler(this.btnAssistirConteudo_Click);
+
+            // 
+            // btnVerVisualizacoes (novo)
+            // 
+            btnVerVisualizacoes.Location = new Point(startX2, y1 + 4 * (buttonHeight + spacingY));
+            btnVerVisualizacoes.Size = new Size(buttonWidth, buttonHeight);
+            btnVerVisualizacoes.Text = "Ver Visualizações";
+            btnVerVisualizacoes.UseVisualStyleBackColor = true;
+            btnVerVisualizacoes.Click += new System.EventHandler(this.btnVerVisualizacoes_Click);
+
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new SizeF(8F, 20F);
             this.AutoScaleMode = AutoScaleMode.Font;
-            this.ClientSize = new Size(800, 500);
+            this.ClientSize = new Size(800, 600);
             this.Name = "Form1";
             this.Text = "Menu Inicial Streaming BD";
             this.StartPosition = FormStartPosition.CenterScreen;
 
-            // Adiciona os controles
             Controls.Clear();
             Controls.Add(label5);
             Controls.Add(lblOpcoes);
@@ -160,7 +179,9 @@
             Controls.Add(btnVerSeries);
             Controls.Add(btnFazerRating);
             Controls.Add(btnAdicionarAtor);
-            Controls.Add(btnVerAtores); // novo
+            Controls.Add(btnVerAtores);
+            Controls.Add(btnAssistirConteudo);
+            Controls.Add(btnVerVisualizacoes); // novo
 
             ResumeLayout(false);
             PerformLayout();
@@ -178,6 +199,8 @@
         private Button btnVerSeries;
         private Button btnFazerRating;
         private Button btnAdicionarAtor;
-        private Button btnVerAtores; // NOVO
+        private Button btnVerAtores;
+        private Button btnAssistirConteudo;
+        private Button btnVerVisualizacoes; // novo
     }
 }
