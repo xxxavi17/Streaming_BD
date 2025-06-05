@@ -7,6 +7,8 @@ namespace Streaming_BD
         private System.Windows.Forms.Button btnAdicionarTemporada;
         private System.Windows.Forms.Button btnVoltar;
         private System.Windows.Forms.Label lblTitulo;
+        private System.Windows.Forms.Button btnRemoverTemporada;
+
 
         protected override void Dispose(bool disposing)
         {
@@ -23,6 +25,7 @@ namespace Streaming_BD
             this.btnAdicionarTemporada = new System.Windows.Forms.Button();
             this.btnVoltar = new System.Windows.Forms.Button();
             this.lblTitulo = new System.Windows.Forms.Label();
+            this.btnRemoverTemporada = new System.Windows.Forms.Button();
 
             // 
             // flowLayoutPanelTemporadas
@@ -44,6 +47,18 @@ namespace Streaming_BD
             this.btnAdicionarTemporada.Text = "Adicionar Temporada";
             this.btnAdicionarTemporada.UseVisualStyleBackColor = true;
             this.btnAdicionarTemporada.Click += new System.EventHandler(this.btnAdicionarTemporada_Click);
+
+            // 
+            // btnRemoverTemporada
+            // 
+            this.btnRemoverTemporada.Location = new System.Drawing.Point(240, 640);
+            this.btnRemoverTemporada.Name = "btnRemoverTemporada";
+            this.btnRemoverTemporada.Size = new System.Drawing.Size(200, 40);
+            this.btnRemoverTemporada.TabIndex = 4;
+            this.btnRemoverTemporada.Text = "Remover Temporada";
+            this.btnRemoverTemporada.UseVisualStyleBackColor = true;
+            this.btnRemoverTemporada.Click += new System.EventHandler(this.btnRemoverTemporada_Click);
+
 
             // 
             // btnVoltar
@@ -77,6 +92,7 @@ namespace Streaming_BD
             this.Controls.Add(this.btnVoltar);
             this.Controls.Add(this.btnAdicionarTemporada);
             this.Controls.Add(this.flowLayoutPanelTemporadas);
+            this.Controls.Add(this.btnRemoverTemporada);
             this.Name = "FormEditarSerieCompleta";
             this.Text = "Edição Completa de Série";
             this.ResumeLayout(false);

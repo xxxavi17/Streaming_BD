@@ -11,6 +11,8 @@ namespace Streaming_BD
         private int idConteudo;
         private string tituloSerie = "";
         private string connectionString = "Server=tcp:mednat.ieeta.pt\\SQLSERVER,8101;Database=p1g11;User Id=p1g11;Password=Theoxavi11;TrustServerCertificate=True";
+        private int? temporadaSelecionada = null;
+        private Panel? painelSelecionado = null;
 
         public FormEditarSerieCompleta(int idConteudo)
         {
@@ -133,6 +135,23 @@ namespace Streaming_BD
                 CarregarTemporadas(); // Atualiza após edição/remoção
             };
 
+            // Tornar o painel clicável para selecionar
+            panel.Click += (s, e) =>
+            {
+                temporadaSelecionada = idTemporada;
+                painelSelecionado = panel;
+
+                // Remover destaque de todos
+                foreach (Control ctrl in flowLayoutPanelTemporadas.Controls)
+                {
+                    ctrl.BackColor = SystemColors.Control;
+                }
+
+                // Destacar o painel clicado
+                panel.BackColor = Color.LightBlue;
+            };
+
+
             panel.Controls.Add(btnVerEpisodios);
 
             return panel;
@@ -149,5 +168,41 @@ namespace Streaming_BD
         {
             this.Close();
         }
+        
+        private void btnRemoverTemporada_Click(object sender, EventArgs e)
+        {
+            if (temporadaSelecionada == null)
+            {
+                MessageBox.Show("Selecione uma temporada clicando em um dos blocos.");
+                return;
+            }
+
+            var confirm = MessageBox.Show("Tem certeza que deseja remover a temporada selecionada?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (confirm != DialogResult.Yes) return;
+
+            try
+            {
+                using (var conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    using (var cmd = new SqlCommand("SP_RemoverTemporada", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@id_temporada", temporadaSelecionada.Value);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                MessageBox.Show("Temporada removida com sucesso!");
+                temporadaSelecionada = null;
+                painelSelecionado = null;
+                CarregarTemporadas();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao remover temporada: " + ex.Message);
+            }
+        }
+
     }
 }

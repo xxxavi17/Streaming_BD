@@ -47,8 +47,8 @@ BEGIN
     VALUES (@id_conteudo, 1);
 
     -- ✅ Inserir Temporada 1 automaticamente
-    INSERT INTO Streaming_Temporada (id_serie, numero_temporada, ano)
-    VALUES (@id_conteudo, 1, @ano);
+    -- INSERT INTO Streaming_Temporada (id_serie, numero_temporada, ano)
+    -- VALUES (@id_conteudo, 1, @ano);
 
     -- 📤 Retornar o ID da série
     SELECT @id_conteudo AS id_serie;
