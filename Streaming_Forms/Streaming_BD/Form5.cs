@@ -68,6 +68,11 @@ namespace Streaming_BD
             CarregarFilmes();
         }
 
+        private void txtPesquisa_TextChanged(object sender, EventArgs e)
+        {
+            CarregarFilmes();
+        }
+
         private void CarregarFilmes()
         {
             using (var conn = new SqlConnection(connectionString))
@@ -75,28 +80,33 @@ namespace Streaming_BD
                 conn.Open();
                 string genero = comboFiltroGenero?.SelectedItem?.ToString() ?? "Todos";
                 string produtora = comboFiltroProdutora?.SelectedItem?.ToString() ?? "Todos";
-                using (var cmd = new SqlCommand("SP_FiltrarFilmesPorGeneroEProdutora", conn))
+                string pesquisa = txtPesquisa?.Text ?? string.Empty;
+                SqlCommand cmd;
+                if (!string.IsNullOrWhiteSpace(pesquisa))
                 {
+                    cmd = new SqlCommand("SP_PesquisarFilmes", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
-                    if (genero == "Todos" || string.IsNullOrWhiteSpace(genero))
-                        cmd.Parameters.AddWithValue("@genero", DBNull.Value);
-                    else
-                        cmd.Parameters.AddWithValue("@genero", genero);
-                    if (produtora == "Todos" || string.IsNullOrWhiteSpace(produtora))
-                        cmd.Parameters.AddWithValue("@produtora", DBNull.Value);
-                    else
-                        cmd.Parameters.AddWithValue("@produtora", produtora);
-                    using (var adapter = new SqlDataAdapter(cmd))
+                    cmd.Parameters.AddWithValue("@pesquisa", pesquisa);
+                    cmd.Parameters.AddWithValue("@genero", (genero == "Todos" || string.IsNullOrWhiteSpace(genero)) ? (object)DBNull.Value : genero);
+                    cmd.Parameters.AddWithValue("@produtora", (produtora == "Todos" || string.IsNullOrWhiteSpace(produtora)) ? (object)DBNull.Value : produtora);
+                }
+                else
+                {
+                    cmd = new SqlCommand("SP_FiltrarFilmesPorGeneroEProdutora", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@genero", (genero == "Todos" || string.IsNullOrWhiteSpace(genero)) ? (object)DBNull.Value : genero);
+                    cmd.Parameters.AddWithValue("@produtora", (produtora == "Todos" || string.IsNullOrWhiteSpace(produtora)) ? (object)DBNull.Value : produtora);
+                }
+                using (var adapter = new SqlDataAdapter(cmd))
+                {
+                    DataTable dt = new DataTable();
+                    adapter.Fill(dt);
+                    dgvConteudos.DataSource = dt;
+                    // Centralizar coluna do título
+                    if (dt.Columns.Contains("titulo"))
                     {
-                        DataTable dt = new DataTable();
-                        adapter.Fill(dt);
-                        dgvConteudos.DataSource = dt;
-                        // Centralizar coluna do título
-                        if (dt.Columns.Contains("titulo"))
-                        {
-                            dgvConteudos.Columns["titulo"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                            dgvConteudos.Columns["titulo"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                        }
+                        dgvConteudos.Columns["titulo"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                        dgvConteudos.Columns["titulo"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
                     }
                 }
             }

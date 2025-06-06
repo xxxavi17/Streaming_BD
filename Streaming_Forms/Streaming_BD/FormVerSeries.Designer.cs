@@ -9,6 +9,8 @@ namespace Streaming_BD
         private System.Windows.Forms.Button btnAdicionarSerie;
         private System.Windows.Forms.Button btnEditarTemporada;
         private System.Windows.Forms.Button btnRemoverTemporada;
+        private System.Windows.Forms.Label lblPesquisa;
+        private System.Windows.Forms.TextBox txtPesquisa;
 
         protected override void Dispose(bool disposing)
         {
@@ -27,6 +29,8 @@ namespace Streaming_BD
             this.btnAdicionarSerie = new System.Windows.Forms.Button();
             this.btnEditarTemporada = new System.Windows.Forms.Button();
             this.btnRemoverTemporada = new System.Windows.Forms.Button();
+            this.lblPesquisa = new System.Windows.Forms.Label();
+            this.txtPesquisa = new System.Windows.Forms.TextBox();
 
             ((System.ComponentModel.ISupportInitialize)(this.dgvSeries)).BeginInit();
             this.SuspendLayout();
@@ -103,11 +107,36 @@ namespace Streaming_BD
             this.btnRemoverTemporada.Click += new System.EventHandler(this.btnRemoverTemporada_Click);
 
             // 
+            // lblPesquisa
+            // 
+            this.lblPesquisa.AutoSize = true;
+            this.lblPesquisa.Location = new System.Drawing.Point(this.lblTitulo.Location.X + this.lblTitulo.Width + 40, 30);
+            this.lblPesquisa.Name = "lblPesquisa";
+            this.lblPesquisa.Size = new System.Drawing.Size(120, 20);
+            this.lblPesquisa.TabIndex = 6;
+            this.lblPesquisa.Text = "Pesquisar Série:";
+            this.lblPesquisa.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+            this.Controls.Add(this.lblPesquisa);
+
+            // 
+            // txtPesquisa
+            // 
+            this.txtPesquisa.Location = new System.Drawing.Point(this.lblPesquisa.Location.X + this.lblPesquisa.Width + 8, 27);
+            this.txtPesquisa.Name = "txtPesquisa";
+            this.txtPesquisa.Size = new System.Drawing.Size(250, 27);
+            this.txtPesquisa.TabIndex = 7;
+            this.txtPesquisa.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+            this.txtPesquisa.TextChanged += new System.EventHandler(this.txtPesquisa_TextChanged);
+            this.Controls.Add(this.txtPesquisa);
+
+            // 
             // FormVerSeries
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1100, 720);
+            this.Controls.Add(this.txtPesquisa);
+            this.Controls.Add(this.lblPesquisa);
             this.Controls.Add(this.btnRemoverTemporada);
             this.Controls.Add(this.btnEditarTemporada);
             this.Controls.Add(this.btnAdicionarSerie);

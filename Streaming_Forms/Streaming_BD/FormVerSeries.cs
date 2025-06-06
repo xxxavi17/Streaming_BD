@@ -20,33 +20,47 @@ namespace Streaming_BD
             CarregarSeriesTemporadas();
         }
 
+        private void txtPesquisa_TextChanged(object sender, EventArgs e)
+        {
+            CarregarSeriesTemporadas();
+        }
+
         private void CarregarSeriesTemporadas()
         {
             using (var conn = new SqlConnection(connectionString))
             {
                 conn.Open();
-                using (var cmd = new SqlCommand("SP_ListarSeriesTemporadasComEpisodios", conn))
+                string pesquisa = txtPesquisa?.Text ?? string.Empty;
+                SqlCommand cmd;
+                if (!string.IsNullOrWhiteSpace(pesquisa))
                 {
+                    cmd = new SqlCommand("SP_PesquisarSeries", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
-                    using (var adapter = new SqlDataAdapter(cmd))
+                    cmd.Parameters.AddWithValue("@pesquisa", pesquisa);
+                }
+                else
+                {
+                    cmd = new SqlCommand("SP_ListarSeriesTemporadasComEpisodios", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                }
+                using (var adapter = new SqlDataAdapter(cmd))
+                {
+                    DataTable dt = new DataTable();
+                    adapter.Fill(dt);
+                    dgvSeries.DataSource = dt;
+
+                    if (dt.Columns.Contains("serie"))
                     {
-                        DataTable dt = new DataTable();
-                        adapter.Fill(dt);
-                        dgvSeries.DataSource = dt;
-
-                        if (dt.Columns.Contains("serie"))
-                        {
-                            dgvSeries.Columns["serie"].HeaderText = "Série";
-                            dgvSeries.Columns["serie"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                            dgvSeries.Columns["serie"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                        }
-
-                        if (dt.Columns.Contains("id_temporada"))
-                            dgvSeries.Columns["id_temporada"].Visible = false;
-
-                        if (dt.Columns.Contains("id_serie"))
-                            dgvSeries.Columns["id_serie"].Visible = false;
+                        dgvSeries.Columns["serie"].HeaderText = "Série";
+                        dgvSeries.Columns["serie"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                        dgvSeries.Columns["serie"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
                     }
+
+                    if (dt.Columns.Contains("id_temporada"))
+                        dgvSeries.Columns["id_temporada"].Visible = false;
+
+                    if (dt.Columns.Contains("id_serie"))
+                        dgvSeries.Columns["id_serie"].Visible = false;
                 }
             }
         }

@@ -23,6 +23,8 @@ namespace Streaming_BD
             this.comboFiltroGenero = new System.Windows.Forms.ComboBox();
             this.lblFiltroProdutora = new System.Windows.Forms.Label();
             this.comboFiltroProdutora = new System.Windows.Forms.ComboBox();
+            this.lblPesquisa = new System.Windows.Forms.Label();
+            this.txtPesquisa = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConteudos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -121,6 +123,22 @@ namespace Streaming_BD
             this.comboFiltroProdutora.SelectedIndexChanged += new System.EventHandler(this.comboFiltroProdutora_SelectedIndexChanged);
             this.Controls.Add(this.comboFiltroProdutora);
             // 
+            // lblPesquisa
+            // 
+            this.lblPesquisa.Text = "Pesquisar Filme:";
+            this.lblPesquisa.Location = new System.Drawing.Point(20, 65);
+            this.lblPesquisa.Size = new System.Drawing.Size(120, 20);
+            this.lblPesquisa.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left);
+            this.Controls.Add(this.lblPesquisa);
+            // 
+            // txtPesquisa
+            // 
+            this.txtPesquisa.Location = new System.Drawing.Point(150, 62);
+            this.txtPesquisa.Size = new System.Drawing.Size(300, 27);
+            this.txtPesquisa.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left);
+            this.txtPesquisa.TextChanged += new System.EventHandler(this.txtPesquisa_TextChanged);
+            this.Controls.Add(this.txtPesquisa);
+            // 
             // Form5
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -167,6 +185,8 @@ namespace Streaming_BD
         private System.Windows.Forms.ComboBox comboFiltroGenero;
         private System.Windows.Forms.Label lblFiltroProdutora;
         private System.Windows.Forms.ComboBox comboFiltroProdutora;
+        private System.Windows.Forms.Label lblPesquisa;
+        private System.Windows.Forms.TextBox txtPesquisa;
 
         // Removed duplicate Form5_Resize method to resolve ambiguity error.
 

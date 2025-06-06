@@ -88,7 +88,7 @@ namespace Streaming_BD
             // checkBoxPremium
             // 
             this.checkBoxPremium.AutoSize = true;
-            this.checkBoxPremium.Location = new System.Drawing.Point(120, 70);
+            this.checkBoxPremium.Location = new System.Drawing.Point(180, 100);
             this.checkBoxPremium.Name = "checkBoxPremium";
             this.checkBoxPremium.Size = new System.Drawing.Size(70, 19);
             this.checkBoxPremium.TabIndex = 9;
@@ -99,7 +99,7 @@ namespace Streaming_BD
             // checkBoxStandart
             // 
             this.checkBoxStandart.AutoSize = true;
-            this.checkBoxStandart.Location = new System.Drawing.Point(210, 70);
+            this.checkBoxStandart.Location = new System.Drawing.Point(180, 125);
             this.checkBoxStandart.Name = "checkBoxStandart";
             this.checkBoxStandart.Size = new System.Drawing.Size(70, 19);
             this.checkBoxStandart.TabIndex = 10;
@@ -110,7 +110,7 @@ namespace Streaming_BD
             // checkBoxSemSub
             // 
             this.checkBoxSemSub.AutoSize = true;
-            this.checkBoxSemSub.Location = new System.Drawing.Point(300, 70);
+            this.checkBoxSemSub.Location = new System.Drawing.Point(180, 150);
             this.checkBoxSemSub.Name = "checkBoxSemSub";
             this.checkBoxSemSub.Size = new System.Drawing.Size(120, 19);
             this.checkBoxSemSub.TabIndex = 11;
@@ -131,7 +131,7 @@ namespace Streaming_BD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 240);
+            this.ClientSize = new System.Drawing.Size(584, 240);
             this.Controls.Add(this.labelTitulo);
             this.Controls.Add(this.buttonCancelar);
             this.Controls.Add(this.buttonGuardar);
