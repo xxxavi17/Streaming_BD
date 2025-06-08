@@ -122,3 +122,10 @@ CREATE TABLE Streaming_Rating (
     FOREIGN KEY (id_cliente) REFERENCES Streaming_Cliente(id_cliente),
     FOREIGN KEY (id_conteudo) REFERENCES Streaming_Conteudo(id_conteudo)
 );
+
+-- 13. AUTENTICAÇÃO DO CLIENTE
+CREATE TABLE Streaming_Cliente_Auth (
+    id_cliente INT PRIMARY KEY,
+    password_hash VARCHAR(256) NOT NULL,
+    FOREIGN KEY (id_cliente) REFERENCES Streaming_Cliente(id_cliente)
+);

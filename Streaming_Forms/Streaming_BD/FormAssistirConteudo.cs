@@ -7,32 +7,18 @@ namespace Streaming_BD
 {
     public partial class FormAssistirConteudo : Form
     {
+        private readonly int clienteId;
+        private readonly string clienteNome;
         private string connectionString = "Server=tcp:mednat.ieeta.pt\\SQLSERVER,8101;Database=p1g11;User Id=p1g11;Password=Theoxavi11;TrustServerCertificate=True";
 
-        public FormAssistirConteudo()
+        public FormAssistirConteudo(int clienteId, string clienteNome)
         {
             InitializeComponent();
-            CarregarClientes();
-            CarregarConteudos();
-        }
+            this.clienteId = clienteId;
+            this.clienteNome = clienteNome;
 
-        private void CarregarClientes()
-        {
-            comboCliente.Items.Clear();
-            using var conn = new SqlConnection(connectionString);
-            conn.Open();
-            var query = "SELECT id_cliente, nome FROM Streaming_Cliente ORDER BY nome";
-            using var cmd = new SqlCommand(query, conn);
-            using var reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                comboCliente.Items.Add(new AssistirComboboxItem
-                {
-                    Text = reader.GetString(1),
-                    Value = reader.GetInt32(0)
-                });
-            }
-            comboCliente.SelectedIndex = comboCliente.Items.Count > 0 ? 0 : -1;
+            lblCliente.Text = $"Cliente: {clienteNome}";
+            CarregarConteudos();
         }
 
         private void CarregarConteudos()
@@ -56,17 +42,17 @@ namespace Streaming_BD
 
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
-            if (comboCliente.SelectedItem is not AssistirComboboxItem clienteItem || comboConteudo.SelectedItem is not AssistirComboboxItem conteudoItem)
+            if (comboConteudo.SelectedItem is not AssistirComboboxItem conteudoItem)
             {
-                MessageBox.Show("Selecione um cliente e um conteúdo.");
+                MessageBox.Show("Selecione um conteúdo.");
                 return;
             }
 
             using var conn = new SqlConnection(connectionString);
             conn.Open();
-            using var cmd = new SqlCommand("SP_RegistrarAssistencia", conn); // nome da sua SP
+            using var cmd = new SqlCommand("SP_RegistrarAssistencia", conn);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@id_cliente", clienteItem.Value);
+            cmd.Parameters.AddWithValue("@id_cliente", clienteId);
             cmd.Parameters.AddWithValue("@id_conteudo", conteudoItem.Value);
 
             try

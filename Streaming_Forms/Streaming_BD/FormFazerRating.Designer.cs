@@ -6,9 +6,9 @@ namespace Streaming_BD
     {
         private System.ComponentModel.IContainer components = null;
         private Label lblTitulo;
-        private ComboBox comboCliente;
-        private ComboBox comboConteudo;
         private Label lblCliente;
+        private Label lblClienteValor;
+        private ComboBox comboConteudo;
         private Label lblConteudo;
         private Label lblRating;
         private NumericUpDown numRating;
@@ -27,15 +27,17 @@ namespace Streaming_BD
             this.lblCliente.Text = "Cliente:";
             this.lblCliente.Location = new System.Drawing.Point(40, 80);
             this.lblCliente.Size = new System.Drawing.Size(100, 25);
-            this.comboCliente = new ComboBox();
-            this.comboCliente.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.comboCliente.Location = new System.Drawing.Point(180, 80);
-            this.comboCliente.Size = new System.Drawing.Size(250, 28);
+
+            this.lblClienteValor = new Label();
+            this.lblClienteValor.Text = ""; // será preenchido no construtor com o nome do cliente
+            this.lblClienteValor.Location = new System.Drawing.Point(180, 80);
+            this.lblClienteValor.Size = new System.Drawing.Size(250, 25);
 
             this.lblConteudo = new Label();
             this.lblConteudo.Text = "Conteúdo:";
             this.lblConteudo.Location = new System.Drawing.Point(40, 130);
             this.lblConteudo.Size = new System.Drawing.Size(100, 25);
+
             this.comboConteudo = new ComboBox();
             this.comboConteudo.DropDownStyle = ComboBoxStyle.DropDownList;
             this.comboConteudo.Location = new System.Drawing.Point(180, 130);
@@ -45,6 +47,7 @@ namespace Streaming_BD
             this.lblRating.Text = "Estrelas (1 a 5):";
             this.lblRating.Location = new System.Drawing.Point(40, 180);
             this.lblRating.Size = new System.Drawing.Size(120, 25);
+
             this.numRating = new NumericUpDown();
             this.numRating.DecimalPlaces = 0;
             this.numRating.Increment = 1M;
@@ -68,7 +71,7 @@ namespace Streaming_BD
             this.ClientSize = new System.Drawing.Size(480, 320);
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.lblCliente);
-            this.Controls.Add(this.comboCliente);
+            this.Controls.Add(this.lblClienteValor);
             this.Controls.Add(this.lblConteudo);
             this.Controls.Add(this.comboConteudo);
             this.Controls.Add(this.lblRating);

@@ -6,7 +6,6 @@ namespace Streaming_BD
         private Label lblTitulo;
         private Label lblCliente;
         private Label lblConteudo;
-        private ComboBox comboCliente;
         private ComboBox comboConteudo;
         private Button btnRegistrar;
         private Button btnCancelar;
@@ -16,7 +15,6 @@ namespace Streaming_BD
             this.lblTitulo = new Label();
             this.lblCliente = new Label();
             this.lblConteudo = new Label();
-            this.comboCliente = new ComboBox();
             this.comboConteudo = new ComboBox();
             this.btnRegistrar = new Button();
             this.btnCancelar = new Button();
@@ -26,19 +24,20 @@ namespace Streaming_BD
             // lblTitulo
             this.lblTitulo.Text = "Registrar Visualização";
             this.lblTitulo.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold);
-            this.lblTitulo.Location = new System.Drawing.Point(100, 20);
+            this.lblTitulo.Location = new System.Drawing.Point(80, 20);
             this.lblTitulo.AutoSize = true;
 
             // lblCliente
             this.lblCliente.Text = "Cliente:";
             this.lblCliente.Location = new System.Drawing.Point(40, 80);
-            this.comboCliente.Location = new System.Drawing.Point(150, 80);
-            this.comboCliente.Size = new System.Drawing.Size(250, 28);
-            this.comboCliente.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.lblCliente.AutoSize = true;
 
             // lblConteudo
             this.lblConteudo.Text = "Conteúdo:";
             this.lblConteudo.Location = new System.Drawing.Point(40, 130);
+            this.lblConteudo.AutoSize = true;
+
+            // comboConteudo
             this.comboConteudo.Location = new System.Drawing.Point(150, 130);
             this.comboConteudo.Size = new System.Drawing.Size(250, 28);
             this.comboConteudo.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -59,7 +58,6 @@ namespace Streaming_BD
             this.ClientSize = new System.Drawing.Size(450, 280);
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.lblCliente);
-            this.Controls.Add(this.comboCliente);
             this.Controls.Add(this.lblConteudo);
             this.Controls.Add(this.comboConteudo);
             this.Controls.Add(this.btnRegistrar);
